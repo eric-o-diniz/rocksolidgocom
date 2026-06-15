@@ -2,205 +2,507 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#090A0D">
-  <title>Quiz: ¿Por qué se enfrió la conversación?</title>
-  <meta name="description" content="Haz el quiz y descubre qué tipo de conversación fría tienes y qué mensaje necesitas enviar para reactivar su interés.">
+  <title>Descubre qué está enfriando la conversación</title>
+  <meta name="description" content="Responde 4 preguntas y descubre qué está enfriando la conversación y qué tipo de mensaje necesitas usar.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#090A0D;--bg2:#101218;--card:#171B23;--card2:#191D27;--red:#DE0001;--red2:#FF4D4D;--text:#F5F3EF;--muted:#B9BEC8;--gold:#D9B36C;--green:#29B765;--line:rgba(255,255,255,.10);--max:920px;--radius:20px;--shadow:0 22px 70px rgba(0,0,0,.42)
+      --bg:#090A0D;
+      --panel:#12151C;
+      --panel2:#181C25;
+      --text:#F5F3EF;
+      --muted:#AEB4C0;
+      --red:#DE0001;
+      --red2:#FF4D4D;
+      --green:#38D27C;
+      --gold:#D9B36C;
+      --line:rgba(255,255,255,.10);
+      --max:760px;
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:radial-gradient(circle at 50% -8%,rgba(222,0,1,.19),transparent 34rem),linear-gradient(180deg,#090A0D 0%,#0B0C0F 58%,#07080B 100%);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-    a{color:inherit} img{max-width:100%;display:block}
-    .wrap{width:min(var(--max),calc(100% - 28px));margin:0 auto;padding:28px 0 54px}
-    .top{position:sticky;top:0;z-index:20;background:rgba(9,10,13,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-    .top-inner{width:min(var(--max),calc(100% - 28px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}
-    .brand{color:#fff}.pill{padding:7px 10px;border:1px solid rgba(222,0,1,.35);border-radius:999px;background:rgba(222,0,1,.10);color:#fff}
-    .hero{text-align:center;padding:32px 0 18px}.eyebrow{margin:0 0 12px;color:var(--green);font-size:13px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
-    h1,h2,h3{font-family:Oswald,Impact,sans-serif;line-height:1.06;margin:0;text-transform:uppercase;letter-spacing:-.01em}h1{font-size:clamp(38px,7.2vw,72px);max-width:880px;margin:0 auto 16px}h1 .red,h2 .red{color:var(--red2)}
-    .sub{max-width:735px;margin:0 auto;color:var(--muted);font-size:clamp(17px,2.5vw,22px)}.sub strong{color:#fff}.micro{margin-top:13px;color:#8E94A3;font-size:13px;font-weight:700}
-    .card{background:linear-gradient(180deg,rgba(25,29,39,.96),rgba(16,18,24,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .quiz-card{max-width:810px;margin:22px auto 0;padding:clamp(20px,4vw,34px)}
-    .progress{height:8px;background:rgba(255,255,255,.10);border-radius:999px;overflow:hidden;margin-bottom:22px}.progress span{display:block;height:100%;width:20%;background:linear-gradient(90deg,var(--red),var(--red2));border-radius:999px;transition:width .25s ease}
-    .q-top{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:13px;font-weight:800;margin-bottom:14px}.question{font-size:clamp(26px,4.5vw,42px);margin-bottom:18px;text-align:left}
-    .answers{display:grid;gap:12px}.answer{width:100%;border:1px solid var(--line);background:#11151D;color:#F5F3EF;border-radius:14px;padding:17px;text-align:left;font:inherit;font-size:16px;font-weight:800;cursor:pointer;transition:.16s ease}.answer:hover{border-color:rgba(255,77,77,.55);background:#161B24;transform:translateY(-1px)}
-    .mini-note{margin:18px 0 0;color:#8E94A3;font-size:13px;text-align:center}
-    .result{display:none;margin-top:30px}.result.show{display:block}.result-head{padding:clamp(24px,5vw,42px);text-align:center;border:1px solid rgba(222,0,1,.42)}.result-label{color:var(--gold);font-size:13px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}.result h2{font-size:clamp(32px,6vw,58px);margin-bottom:14px}.result-copy{max-width:725px;margin:0 auto;color:var(--muted);font-size:18px}.diagnosis{margin-top:18px;padding:18px;border:1px solid rgba(217,179,108,.35);background:rgba(217,179,108,.08);border-radius:14px;color:#fff;font-weight:800}
-    .sales{display:none}.sales.show{display:block}.section{margin-top:28px;padding:clamp(22px,4.6vw,38px)}.section h2{font-size:clamp(30px,5vw,48px);text-align:center;margin-bottom:18px}.section p{font-size:17px;color:#E8EAF0;margin:0 0 14px}.section p:last-child{margin-bottom:0}.scenario{border-left:4px solid var(--red)}.chat{display:grid;gap:10px;margin:20px 0}.bubble{max-width:88%;padding:14px 16px;border-radius:15px;font-weight:800}.her{background:#222733;color:#EDEFF4;border-bottom-left-radius:4px}.him{background:#12351F;color:#DDF8E6;justify-self:end;border-bottom-right-radius:4px}.bad{color:var(--gold);text-align:center;font-weight:900;margin-top:12px}
-    .mockup{display:grid;place-items:center;min-height:250px;margin:18px auto 20px;padding:16px;border:2px dashed rgba(255,255,255,.18);border-radius:18px;background:#101218;color:var(--muted);text-align:center;font-weight:800}.mockup code{display:inline-block;margin-top:7px;color:#fff;background:rgba(255,255,255,.08);border-radius:6px;padding:5px 8px}
-    .benefits{display:grid;gap:12px;margin:20px 0 0;padding:0;list-style:none}.benefits li{position:relative;padding:15px 16px 15px 48px;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.18);font-weight:700}.benefits li:before{content:'✓';position:absolute;left:17px;top:13px;color:#7CE7AA;font-size:22px;font-weight:900}
-    .offer{text-align:center;border-color:rgba(222,0,1,.45)}.offer .kicker{color:var(--gold);font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}.offer h2{margin-bottom:10px}.price{font-family:Oswald,Impact,sans-serif;font-size:clamp(60px,11vw,88px);line-height:1;color:#fff;margin:14px 0}.price sup{font-size:.38em;position:relative;top:-.48em}.cta{display:block;width:100%;padding:19px 20px;border-radius:13px;background:linear-gradient(180deg,#FF5454,var(--red));color:#fff;text-decoration:none;text-align:center;text-transform:uppercase;font-size:clamp(17px,3vw,21px);font-weight:900;box-shadow:0 14px 30px rgba(222,0,1,.34)}.cta:hover{filter:brightness(1.07);transform:translateY(-1px)}.guarantee{margin-top:14px;color:var(--muted);font-size:13px}.faq details{border-top:1px solid var(--line)}.faq details:last-child{border-bottom:1px solid var(--line)}summary{padding:17px 2px;cursor:pointer;font-weight:900}summary::after{content:'+';float:right;color:var(--red2)}details[open] summary::after{content:'−'}details p{padding:0 2px 17px;color:var(--muted);font-size:15px}footer{padding:0 20px 38px;color:#707581;font-size:12px;text-align:center}.hidden{display:none!important}
-    @media(max-width:650px){.top-inner{font-size:10px}.pill{display:none}.hero{padding-top:25px}.quiz-card,.section{border-radius:17px}.question{text-align:center}.answer{font-size:15px;padding:15px}.bubble{max-width:96%}}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 50% 0,rgba(222,0,1,.15),transparent 30rem),
+        var(--bg);
+      color:var(--text);
+      font-family:Inter,Arial,sans-serif;
+      line-height:1.45;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    button,a{font:inherit}
+    img{display:block;max-width:100%}
+
+    .quiz-screen{
+      min-height:100svh;
+      display:grid;
+      align-items:center;
+      padding:16px;
+    }
+
+    .quiz-wrap{
+      width:min(var(--max),100%);
+      margin:0 auto;
+    }
+
+    .quiz-intro{
+      margin-bottom:12px;
+      text-align:center;
+    }
+
+    .quiz-intro p{
+      margin:0 0 6px;
+      color:var(--red2);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+
+    .quiz-intro h1{
+      max-width:650px;
+      margin:0 auto;
+      font-family:Oswald,Impact,sans-serif;
+      font-size:clamp(27px,5.5vw,42px);
+      line-height:1.05;
+      text-transform:uppercase;
+    }
+
+    .quiz-card{
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:linear-gradient(180deg,var(--panel2),var(--panel));
+      box-shadow:0 22px 65px rgba(0,0,0,.45);
+    }
+
+    .progress-track{
+      height:5px;
+      background:rgba(255,255,255,.08);
+    }
+
+    .progress-bar{
+      width:25%;
+      height:100%;
+      background:linear-gradient(90deg,var(--red),var(--red2));
+      transition:width .25s ease;
+    }
+
+    .quiz-body{padding:22px}
+
+    .quiz-meta{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:11px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .question{
+      margin:0 0 16px;
+      font-family:Oswald,Impact,sans-serif;
+      font-size:clamp(25px,5vw,36px);
+      line-height:1.08;
+    }
+
+    .answers{display:grid;gap:9px}
+
+    .answer{
+      width:100%;
+      padding:14px 15px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#0F1218;
+      color:var(--text);
+      text-align:left;
+      font-size:15px;
+      font-weight:750;
+      cursor:pointer;
+      transition:.15s ease;
+    }
+
+    .answer:hover,.answer:focus-visible{
+      outline:none;
+      border-color:rgba(255,77,77,.65);
+      background:#151922;
+      transform:translateY(-1px);
+    }
+
+    .checkpoint{
+      display:none;
+      text-align:center;
+      animation:fade .22s ease;
+    }
+
+    .checkpoint.show{display:block}
+
+    .check-icon{
+      display:grid;
+      width:48px;
+      height:48px;
+      margin:0 auto 12px;
+      place-items:center;
+      border-radius:50%;
+      background:rgba(56,210,124,.13);
+      border:1px solid rgba(56,210,124,.35);
+      color:var(--green);
+      font-size:24px;
+      font-weight:900;
+    }
+
+    .checkpoint h2{
+      margin:0 0 9px;
+      font-family:Oswald,Impact,sans-serif;
+      font-size:clamp(25px,5vw,35px);
+      text-transform:uppercase;
+    }
+
+    .checkpoint p{
+      max-width:540px;
+      margin:0 auto 18px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .next-btn{
+      width:100%;
+      padding:15px 18px;
+      border:0;
+      border-radius:12px;
+      background:linear-gradient(180deg,#FF5555,var(--red));
+      color:#fff;
+      font-weight:900;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:0 12px 28px rgba(222,0,1,.28);
+    }
+
+    .privacy{
+      margin:11px 0 0;
+      color:#737A86;
+      font-size:11px;
+      text-align:center;
+    }
+
+    .sales-page{display:none}
+    .sales-page.show{display:block}
+
+    .sales-wrap{
+      width:min(900px,calc(100% - 28px));
+      margin:0 auto;
+      padding:28px 0 54px;
+    }
+
+    .result-card,.section{
+      margin-bottom:22px;
+      padding:clamp(22px,5vw,38px);
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:linear-gradient(180deg,rgba(24,28,37,.98),rgba(16,18,24,.98));
+      box-shadow:0 20px 55px rgba(0,0,0,.35);
+    }
+
+    .result-card{text-align:center;border-color:rgba(217,179,108,.38)}
+
+    .result-kicker,.offer-kicker{
+      margin-bottom:8px;
+      color:var(--gold);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+
+    .result-card h2,.section h2{
+      margin:0 0 13px;
+      font-family:Oswald,Impact,sans-serif;
+      font-size:clamp(31px,6vw,52px);
+      line-height:1.05;
+      text-transform:uppercase;
+    }
+
+    .result-card p,.section p{
+      margin:0 0 13px;
+      color:var(--muted);
+      font-size:17px;
+    }
+
+    .result-card p:last-child,.section p:last-child{margin-bottom:0}
+
+    .diagnosis{
+      margin-top:17px;
+      padding:15px;
+      border-left:4px solid var(--red);
+      border-radius:10px;
+      background:rgba(0,0,0,.20);
+      color:#fff;
+      font-weight:800;
+      text-align:left;
+    }
+
+    .product-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+      gap:26px;
+      align-items:center;
+    }
+
+    .mockup img{
+      width:100%;
+      filter:drop-shadow(0 22px 26px rgba(0,0,0,.48));
+    }
+
+    .product-copy h2{text-align:left}
+
+    .benefits{
+      display:grid;
+      gap:10px;
+      margin:18px 0 0;
+      padding:0;
+      list-style:none;
+    }
+
+    .benefits li{
+      position:relative;
+      padding-left:29px;
+      color:#EEF0F4;
+      font-weight:700;
+    }
+
+    .benefits li::before{
+      content:'✓';
+      position:absolute;
+      left:0;
+      color:var(--green);
+      font-weight:900;
+    }
+
+    .offer{text-align:center;border-color:rgba(222,0,1,.45)}
+    .price{margin:8px 0 17px;font-family:Oswald,Impact,sans-serif;font-size:clamp(62px,12vw,90px);line-height:1}
+    .price sup{position:relative;top:-.5em;font-size:.38em}
+
+    .cta{
+      display:block;
+      width:100%;
+      padding:18px 20px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#FF5555,var(--red));
+      color:#fff;
+      text-decoration:none;
+      font-size:clamp(17px,3vw,21px);
+      font-weight:900;
+      text-transform:uppercase;
+      box-shadow:0 14px 30px rgba(222,0,1,.30);
+    }
+
+    .microcopy{margin-top:11px!important;color:#7E8591!important;font-size:12px!important}
+    footer{padding:0 18px 34px;color:#686F7A;font-size:11px;text-align:center}
+
+    @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+    @media(max-width:680px){
+      .quiz-screen{align-items:start;padding:10px 12px 16px}
+      .quiz-wrap{padding-top:max(4px,env(safe-area-inset-top))}
+      .quiz-intro{margin-bottom:9px}
+      .quiz-intro h1{font-size:27px}
+      .quiz-body{padding:17px}
+      .quiz-meta{margin-bottom:8px;font-size:11px}
+      .question{font-size:25px;margin-bottom:13px}
+      .answer{padding:12px 13px;font-size:14px}
+      .answers{gap:8px}
+      .privacy{margin-top:8px}
+      .product-grid{grid-template-columns:1fr;gap:10px}
+      .mockup img{max-height:310px;object-fit:contain;margin:auto}
+      .product-copy h2{text-align:center}
+      .result-card,.section{padding:22px 18px}
+    }
   </style>
 </head>
 <body>
-  <div class="top"><div class="top-inner"><span class="brand">Derick Zinid</span><span>Quiz rápido de 60 segundos</span><span class="pill">Resultado personalizado</span></div></div>
-  <main class="wrap">
-    <section class="hero" id="quiz-start">
-      <p class="eyebrow">Para hombres que no quieren arruinar otro chat</p>
-      <h1>Descubre por qué <span class="red">ella ya no responde como antes</span></h1>
-      <p class="sub">Haz este quiz corto y recibe un diagnóstico simple del tipo de conversación fría que tienes. Después verás qué mensaje necesitas para reactivar su curiosidad sin rogar, perseguirla ni mandar otro triste <strong>“¿qué haces?”</strong>.</p>
-      <p class="micro">No es terapia. Es WhatsApp. No debería ser tan difícil, pero aquí estamos.</p>
-    </section>
-
-    <section class="quiz-card card" id="quizBox">
-      <div class="progress"><span id="bar"></span></div>
-      <div class="q-top"><span id="stepText">Pregunta 1 de 5</span><span id="typeHint">Responde con honestidad</span></div>
-      <h2 class="question" id="questionText"></h2>
-      <div class="answers" id="answers"></div>
-      <p class="mini-note">Elige la opción que más se parece a tu situación actual.</p>
-    </section>
-
-    <section class="result" id="resultSection">
-      <div class="result-head card">
-        <div class="result-label">Tu diagnóstico</div>
-        <h2 id="resultTitle"></h2>
-        <p class="result-copy" id="resultCopy"></p>
-        <div class="diagnosis" id="resultDiagnosis"></div>
+  <section class="quiz-screen" id="quizScreen">
+    <div class="quiz-wrap">
+      <div class="quiz-intro">
+        <p>Diagnóstico rápido</p>
+        <h1>¿Qué está enfriando la conversación?</h1>
       </div>
-    </section>
 
-    <section class="sales" id="salesPage">
-      <section class="section card scenario">
-        <h2>El problema no es que no tengas tema</h2>
-        <p>El problema es que cuando el chat se enfría, tu cabeza empieza a inventar una telenovela barata.</p>
-        <p>Ves que tarda. Ves que responde corto. Ves el “visto”. Y de repente estás escribiendo, borrando, volviendo a escribir y pensando si vas a parecer necesitado.</p>
-        <div class="chat">
-          <div class="bubble her">jaja sí</div>
-          <div class="bubble him">¿Y qué haces?</div>
-          <div class="bubble her">nada</div>
+      <div class="quiz-card">
+        <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="quiz-body">
+          <div id="questionView">
+            <div class="quiz-meta">
+              <span id="stepLabel">Pregunta 1 de 4</span>
+              <span>Elige una respuesta</span>
+            </div>
+            <h2 class="question" id="questionText"></h2>
+            <div class="answers" id="answers"></div>
+          </div>
+
+          <div class="checkpoint" id="checkpointView">
+            <div class="check-icon">✓</div>
+            <h2 id="checkpointTitle">Tiene sentido</h2>
+            <p id="checkpointText"></p>
+            <button class="next-btn" id="nextButton" type="button">Continuar</button>
+          </div>
         </div>
-        <div class="bad">Y ahí muere otra conversación. Funeral digital. Flores no incluidas.</div>
+      </div>
+
+      <p class="privacy">4 preguntas · Sin registro · Resultado inmediato</p>
+    </div>
+  </section>
+
+  <main class="sales-page" id="salesPage">
+    <div class="sales-wrap">
+      <section class="result-card">
+        <div class="result-kicker">Tu resultado personalizado</div>
+        <h2 id="resultTitle"></h2>
+        <p id="resultCopy"></p>
+        <div class="diagnosis" id="resultAction"></div>
       </section>
 
-      <section class="section card">
-        <h2>Presentamos: 7 Mensajes Para Revivir un Chat Frío</h2>
-        <div class="mockup">
-          <div>Espacio para mockup del producto.<br>Reemplaza <code>link_holder</code> por tu imagen.</div>
+      <section class="section">
+        <div class="product-grid">
+          <div class="mockup">
+            <img src="https://rocksolidgo.com/7mensajes/images/7mensajesmockup.webp?_t=1781413785" alt="7 Mensajes Para Revivir un Chat Frío">
+          </div>
+          <div class="product-copy">
+            <div class="offer-kicker">La solución para tu situación</div>
+            <h2>7 Mensajes Para Revivir un Chat Frío</h2>
+            <p>No necesitas hablar más. Necesitas enviar algo distinto.</p>
+            <p>Esta guía te muestra qué mensaje usar según lo que está pasando, cuándo enviarlo y qué hacer después.</p>
+            <ul class="benefits">
+              <li>7 mensajes para 7 tipos de conversación fría.</li>
+              <li>Cuándo enviar cada uno y cuándo no insistir.</li>
+              <li>Cómo adaptarlos para que suenen naturales.</li>
+              <li>Qué hacer si responde bien, frío o no responde.</li>
+            </ul>
+          </div>
         </div>
-        <p><strong>7 Mensajes Para Revivir un Chat Frío</strong> te da mensajes exactos para usar cuando ella responde corto, tarda demasiado, desaparece o la conversación perdió toda la energía.</p>
-        <p>No son frases mágicas. Son movimientos simples para cambiar la energía del chat sin verte como el tipo que ruega atención.</p>
-        <ul class="benefits">
-          <li>7 mensajes para 7 situaciones comunes de chat frío.</li>
-          <li>Cuándo usar cada mensaje y cuándo no enviar nada.</li>
-          <li>Cómo adaptar el mensaje para que no suene copiado.</li>
-          <li>Qué hacer si ella responde bien, fría o no responde.</li>
-          <li>Errores que hacen que parezcas ansioso o necesitado.</li>
-        </ul>
       </section>
 
-      <section class="section card">
-        <h2>Tu siguiente movimiento debe ser claro</h2>
-        <p>Si ella ya no responde como antes, mandar más mensajes al azar casi nunca arregla nada.</p>
-        <p>Necesitas saber qué tipo de frío tienes enfrente y qué mensaje usar para abrir una nueva puerta.</p>
-        <p><strong>Eso es exactamente lo que este producto te entrega.</strong></p>
-      </section>
-
-      <section class="section card offer" id="oferta">
-        <div class="kicker">Acceso inmediato</div>
-        <h2>Obtén los 7 mensajes ahora</h2>
-        <p>Empieza hoy con una guía corta, directa y práctica para saber qué escribir cuando la conversación se apagó.</p>
+      <section class="section offer">
+        <div class="offer-kicker">Acceso inmediato · Pago único</div>
+        <h2>Deja de adivinar qué escribir</h2>
+        <p>Obtén los 7 mensajes y elige el movimiento correcto antes de volver a empeorar la conversación.</p>
         <div class="price"><sup>$</sup>9</div>
-        <a class="cta" href="checkout_link_holder">Sí, quiero revivir el chat frío</a>
-        <p class="guarantee">Pago único · Producto digital · Reemplaza <strong>checkout_link_holder</strong> por tu link.</p>
+        <a class="cta" href="checkout_link_holder">Sí, quiero saber qué enviar</a>
+        <p class="microcopy">Producto digital · Acceso inmediato · Sin suscripción</p>
       </section>
-
-      <section class="section card faq">
-        <h2>Preguntas rápidas</h2>
-        <details><summary>¿Esto garantiza que ella responda?</summary><p>No. Nadie controla a otra persona. Esto te da mejores movimientos para no empeorar el chat y para reconocer cuándo sí vale la pena intentar reactivarlo.</p></details>
-        <details><summary>¿Son mensajes largos?</summary><p>No. Son mensajes cortos y fáciles de adaptar. La idea no es escribir una novela. Ya hay suficientes hombres haciendo eso y perdiendo igual.</p></details>
-        <details><summary>¿Sirve si me dejó en visto?</summary><p>Sí, incluye escenarios para visto, respuestas cortas, demora, conversación seca y cuando tú mismo escribiste demasiado.</p></details>
-      </section>
-    </section>
+    </div>
   </main>
-  <footer>© 2026 Derick Zinid. Producto educativo. Respeta siempre una falta clara de interés, límites y reciprocidad.</footer>
+
+  <footer>© 2026 Derick Zinid. Respeta siempre una falta clara de interés y los límites de la otra persona.</footer>
 
   <script>
     const questions = [
-      { q: '¿Qué está pasando con ella ahora mismo?', a: [
-        ['Responde corto: “jaja”, “sí”, “bien” y nada más.', 'short'],
-        ['Tarda horas o días en responder.', 'delay'],
-        ['Me dejó en visto y no dijo nada.', 'seen'],
-        ['La charla iba bien, pero se apagó.', 'dead']
-      ]},
-      { q: 'Cuando notas eso, ¿qué haces normalmente?', a: [
-        ['Mando otra pregunta para salvar la charla.', 'interview'],
-        ['Espero, pero me quedo pensando demasiado.', 'overthink'],
-        ['Mando más de un mensaje y después me arrepiento.', 'chase'],
-        ['No hago nada porque no quiero parecer necesitado.', 'freeze']
-      ]},
-      { q: '¿Qué frase describe mejor el chat?', a: [
-        ['Siento que hablo yo solo.', 'alone'],
-        ['Ella responde por educación, no por ganas.', 'polite'],
-        ['Antes había energía. Ahora parece obligación.', 'lost'],
-        ['No sé si insistir o retirarme.', 'confused']
-      ]},
-      { q: '¿Qué es lo que más quieres evitar?', a: [
-        ['Parecer desesperado.', 'needy'],
-        ['Mandar otro “¿qué haces?”.', 'boring'],
-        ['Perder la oportunidad por no escribir nada.', 'miss'],
-        ['Empeorar algo que todavía puede volver.', 'ruin']
-      ]},
-      { q: 'Si tuvieras una guía, ¿qué te gustaría que te diera?', a: [
-        ['Mensajes exactos para copiar y adaptar.', 'scripts'],
-        ['Saber cuándo enviar y cuándo callar.', 'timing'],
-        ['Qué hacer si responde fría o no responde.', 'response'],
-        ['Un plan simple, sin teoría larga.', 'simple']
-      ]}
+      {
+        q:'¿Qué está haciendo ella ahora?',
+        answers:[
+          {text:'Responde corto: “jaja”, “sí”, “bien”.',type:'short',insight:'Cuando responde por responder, otra pregunta suele volver el chat todavía más pesado.'},
+          {text:'Tarda horas o días.',type:'delay',insight:'La demora no se arregla enviando más. Primero hay que cambiar la energía.'},
+          {text:'Me dejó en visto.',type:'seen',insight:'Después de un visto, reclamar o perseguir casi siempre cierra más la puerta.'},
+          {text:'La charla iba bien y se apagó.',type:'dead',insight:'Una charla puede morir sin que todo esté perdido. Pero repetir lo mismo no la revive.'}
+        ]
+      },
+      {
+        q:'¿Qué haces tú cuando notas el cambio?',
+        answers:[
+          {text:'Mando otra pregunta.',type:'interview',insight:'Más preguntas pueden convertir la conversación en una entrevista sin emoción.'},
+          {text:'Escribo, borro y pienso demasiado.',type:'overthink',insight:'Pensar demasiado suele producir mensajes largos, tensos o fuera de momento.'},
+          {text:'Mando más de un mensaje.',type:'chase',insight:'Un buen mensaje pierde fuerza cuando veinte minutos después llegan otros tres.'},
+          {text:'No hago nada por miedo a parecer necesitado.',type:'freeze',insight:'Callar por miedo tampoco es estrategia. Lo importante es elegir bien el momento.'}
+        ]
+      },
+      {
+        q:'¿Qué frase se parece más a tu conversación?',
+        answers:[
+          {text:'“Siento que hablo yo solo.”',type:'alone',insight:'Si solo tú sostienes el chat, necesitas probar interés antes de seguir invirtiendo.'},
+          {text:'“Antes respondía mejor.”',type:'lost',insight:'Cuando la energía cambia, conviene romper el patrón en vez de insistir con el mismo tono.'},
+          {text:'“No sé si insistir o retirarme.”',type:'confused',insight:'La duda aparece cuando no tienes una regla clara para leer la respuesta.'},
+          {text:'“Creo que escribí demasiado.”',type:'overdid',insight:'Sobreexplicar suele quitar tensión. Una buena recuperación debe ser corta y limpia.'}
+        ]
+      },
+      {
+        q:'¿Qué necesitas saber ahora mismo?',
+        answers:[
+          {text:'Qué mensaje enviar.',type:'scripts',insight:'Exacto. No necesitas más teoría. Necesitas un mensaje que encaje con tu situación.'},
+          {text:'Cuándo volver a escribir.',type:'timing',insight:'El mismo mensaje puede funcionar o fallar según el momento en que lo envías.'},
+          {text:'Qué hacer si responde frío.',type:'response',insight:'La respuesta siguiente importa tanto como el primer mensaje.'},
+          {text:'Cuándo dejar de insistir.',type:'stop',insight:'Saber retirarte también protege tu dignidad y evita empeorar la situación.'}
+        ]
+      }
     ];
 
     const profiles = {
-      short: {title:'Ella responde, pero no participa', copy:'Tu problema no es silencio total. Es peor: ella responde lo mínimo suficiente para que tú sigas intentando.', diag:'Necesitas un mensaje que cambie la energía, no otra pregunta aburrida.'},
-      delay: {title:'Ella tarda y tú empiezas a perder control', copy:'La demora hace que pienses demasiado. Y cuando por fin escribes, suenas más ansioso de lo que querías.', diag:'Necesitas saber cuándo esperar, cuándo entrar y cómo no romper la curiosidad.'},
-      seen: {title:'Te dejó en visto y ahora todo se siente delicado', copy:'Un mensaje de más puede hacerte ver necesitado. Pero quedarte congelado tampoco te ayuda.', diag:'Necesitas una reentrada limpia, sin reclamo y sin perseguir.'},
-      dead: {title:'La conversación se apagó', copy:'Antes había algo. Ahora se siente seca, lenta y sin dirección. Eso no se arregla entrevistándola.', diag:'Necesitas un mensaje que vuelva a abrir curiosidad sin forzar la charla.'}
+      short:{title:'La conversación está viva, pero sin energía',copy:'Ella responde, pero no te da mucho con qué trabajar. Seguir preguntando puede hacer que todo se sienta todavía más forzado.',action:'Tu mejor siguiente paso: usar un mensaje que rompa el patrón y despierte curiosidad sin perseguirla.'},
+      delay:{title:'La espera te está haciendo perder el control',copy:'El problema no es solo que tarde. Es lo que haces mientras esperas: pensar demasiado, revisar el chat y querer arreglarlo con otro mensaje.',action:'Tu mejor siguiente paso: elegir un mensaje con buen timing y después dejar espacio para que ella participe.'},
+      seen:{title:'Necesitas una reentrada limpia',copy:'Después de un visto, cualquier reclamo suena pesado. Pero desaparecer para siempre por orgullo tampoco te da claridad.',action:'Tu mejor siguiente paso: volver a entrar sin presión, sin reclamar y sin parecer que llevas tres días mirando la pantalla.'},
+      dead:{title:'La conversación perdió el ritmo',copy:'Antes había algo. Ahora todo se siente lento o sin dirección. No necesitas inventar veinte temas nuevos.',action:'Tu mejor siguiente paso: enviar un mensaje que cambie la energía en vez de intentar continuar exactamente donde murió.'}
     };
 
-    let current = 0;
-    const scores = {short:0, delay:0, seen:0, dead:0, interview:0, overthink:0, chase:0, freeze:0, alone:0, polite:0, lost:0, confused:0, needy:0, boring:0, miss:0, ruin:0, scripts:0, timing:0, response:0, simple:0};
-    const qText = document.getElementById('questionText');
-    const answers = document.getElementById('answers');
-    const stepText = document.getElementById('stepText');
-    const bar = document.getElementById('bar');
+    let index=0;
+    let firstType='dead';
+    const questionText=document.getElementById('questionText');
+    const answers=document.getElementById('answers');
+    const stepLabel=document.getElementById('stepLabel');
+    const progressBar=document.getElementById('progressBar');
+    const questionView=document.getElementById('questionView');
+    const checkpointView=document.getElementById('checkpointView');
+    const checkpointText=document.getElementById('checkpointText');
+    const nextButton=document.getElementById('nextButton');
 
     function renderQuestion(){
-      const item = questions[current];
-      qText.textContent = item.q;
-      stepText.textContent = `Pregunta ${current + 1} de ${questions.length}`;
-      bar.style.width = `${((current + 1) / questions.length) * 100}%`;
-      answers.innerHTML = '';
-      item.a.forEach(([text,key]) => {
-        const btn = document.createElement('button');
-        btn.className = 'answer';
-        btn.type = 'button';
-        btn.textContent = text;
-        btn.addEventListener('click', () => choose(key));
-        answers.appendChild(btn);
+      const item=questions[index];
+      stepLabel.textContent=`Pregunta ${index+1} de ${questions.length}`;
+      progressBar.style.width=`${((index+1)/questions.length)*100}%`;
+      questionText.textContent=item.q;
+      answers.innerHTML='';
+      item.answers.forEach(answer=>{
+        const button=document.createElement('button');
+        button.type='button';
+        button.className='answer';
+        button.textContent=answer.text;
+        button.addEventListener('click',()=>selectAnswer(answer));
+        answers.appendChild(button);
       });
     }
 
-    function choose(key){
-      scores[key] = (scores[key] || 0) + 1;
-      current++;
-      if(current < questions.length){ renderQuestion(); return; }
-      showResult();
+    function selectAnswer(answer){
+      if(index===0) firstType=answer.type;
+      questionView.style.display='none';
+      checkpointText.textContent=answer.insight;
+      nextButton.textContent=index===questions.length-1?'Ver mi resultado':'Continuar';
+      checkpointView.classList.add('show');
     }
 
+    nextButton.addEventListener('click',()=>{
+      checkpointView.classList.remove('show');
+      index++;
+      if(index<questions.length){
+        questionView.style.display='block';
+        renderQuestion();
+      }else{
+        showResult();
+      }
+    });
+
     function showResult(){
-      document.getElementById('quizBox').classList.add('hidden');
-      const primary = ['short','delay','seen','dead'].sort((a,b)=>scores[b]-scores[a])[0] || 'dead';
-      const p = profiles[primary];
-      document.getElementById('resultTitle').textContent = p.title;
-      document.getElementById('resultCopy').textContent = p.copy;
-      document.getElementById('resultDiagnosis').textContent = p.diag;
-      document.getElementById('resultSection').classList.add('show');
+      const profile=profiles[firstType]||profiles.dead;
+      document.getElementById('resultTitle').textContent=profile.title;
+      document.getElementById('resultCopy').textContent=profile.copy;
+      document.getElementById('resultAction').textContent=profile.action;
+      document.getElementById('quizScreen').style.display='none';
       document.getElementById('salesPage').classList.add('show');
-      setTimeout(()=>document.getElementById('resultSection').scrollIntoView({behavior:'smooth',block:'start'}),120);
+      window.scrollTo({top:0,behavior:'instant'});
     }
 
     renderQuestion();
