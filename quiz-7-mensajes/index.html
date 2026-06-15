@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#f5f6f8">
+  <meta name="theme-color" content="#ffffff">
   <title>Diagnóstico de Chat Frío | 7 Mensajes</title>
   <meta name="description" content="Responde 4 preguntas y descubre qué tipo de mensaje necesitas para reactivar una conversación fría.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,29 +12,29 @@
 
   <style>
     :root{
-      --page:#f5f6f8;
-      --card:#ffffff;
-      --ink:#111318;
-      --soft:#626a78;
-      --muted:#89919e;
-      --line:#dfe3e9;
+      --white:#ffffff;
+      --page:#f7f8fa;
+      --ink:#17191d;
+      --soft:#606875;
+      --muted:#9299a4;
+      --line:#dfe3e8;
+      --line-dark:#c7cdd5;
       --red:#d90000;
       --red-dark:#aa0000;
-      --green:#167a4a;
+      --green:#16834f;
       --black:#090a0d;
-      --shadow:0 18px 55px rgba(17,19,24,.13);
-      --radius:18px;
-      --max:720px;
+      --max:650px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+
     body{
       margin:0;
-      background:var(--page);
+      background:var(--white);
       color:var(--ink);
       font-family:Inter,Arial,sans-serif;
-      line-height:1.35;
+      line-height:1.4;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
     }
@@ -46,57 +46,49 @@
     .quiz-view{
       min-height:100svh;
       display:flex;
-      align-items:flex-start;
       justify-content:center;
-      padding:clamp(14px,3.2vh,28px) 14px 20px;
+      background:var(--white);
     }
 
     .quiz-shell{
       width:min(100%,var(--max));
+      min-height:100svh;
+      display:flex;
+      flex-direction:column;
+      padding:22px 24px calc(22px + env(safe-area-inset-bottom));
     }
 
-    .quiz-intro{
-      text-align:center;
-      margin-bottom:14px;
+    .quiz-top{
+      flex:0 0 auto;
+    }
+
+    .quiz-meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:12px;
     }
 
     .quiz-label{
-      margin:0 0 7px;
-      color:var(--red);
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-    }
-
-    .quiz-title{
       margin:0;
-      font-size:clamp(25px,6.5vw,43px);
-      line-height:1.04;
-      letter-spacing:-.035em;
+      color:var(--soft);
+      font-size:13px;
+      font-weight:900;
     }
 
-    .quiz-card{
-      padding:clamp(18px,4vw,30px);
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-
-    .progress-row{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:20px;
+    .progress-count{
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      white-space:nowrap;
     }
 
     .progress-track{
-      flex:1;
-      height:6px;
+      height:8px;
       overflow:hidden;
       border-radius:999px;
-      background:#eceff3;
+      background:#e9ecf0;
     }
 
     .progress-bar{
@@ -107,37 +99,39 @@
       transition:width .22s ease;
     }
 
-    .progress-count{
-      color:var(--muted);
-      font-size:12px;
-      font-weight:800;
-      white-space:nowrap;
+    .quiz-screen{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      padding-top:clamp(42px,8vh,82px);
     }
 
     .question{
-      margin:0 0 17px;
-      font-size:clamp(22px,5.4vw,34px);
-      line-height:1.12;
-      letter-spacing:-.025em;
+      max-width:600px;
+      margin:0 0 30px;
+      font-size:clamp(31px,7vw,45px);
+      line-height:1.08;
+      letter-spacing:-.04em;
     }
 
     .answers{
       display:grid;
-      gap:10px;
+      gap:15px;
     }
 
     .answer{
       width:100%;
-      min-height:54px;
-      padding:14px 15px;
-      border:1px solid var(--line);
-      border-radius:12px;
+      min-height:68px;
+      padding:18px 20px;
+      border:2px solid var(--line);
+      border-bottom-color:var(--line-dark);
+      border-radius:15px;
       background:#fff;
       color:var(--ink);
       text-align:left;
-      font-size:15px;
-      font-weight:750;
-      line-height:1.25;
+      font-size:18px;
+      font-weight:800;
+      line-height:1.28;
       cursor:pointer;
       transition:border-color .14s ease,background .14s ease,transform .14s ease;
     }
@@ -149,120 +143,133 @@
       transform:translateY(-1px);
     }
 
-    .checkpoint{
+    .checkpoint,
+    .result-stage{
       display:none;
+      flex:1;
+      flex-direction:column;
+      padding-top:clamp(54px,10vh,100px);
       text-align:center;
-      padding:8px 2px 2px;
     }
 
-    .checkpoint.show{display:block}
+    .checkpoint.show,
+    .result-stage.show{display:flex}
 
     .check-icon{
-      width:54px;
-      height:54px;
+      width:72px;
+      height:72px;
       display:grid;
       place-items:center;
-      margin:0 auto 15px;
+      margin:0 auto 28px;
       border-radius:50%;
       background:#eaf7f0;
       color:var(--green);
-      font-size:25px;
+      font-size:34px;
       font-weight:900;
     }
 
     .checkpoint-kicker{
-      margin:0 0 7px;
+      margin:0 0 12px;
       color:var(--green);
-      font-size:11px;
+      font-size:13px;
       font-weight:900;
-      letter-spacing:.10em;
+      letter-spacing:.08em;
       text-transform:uppercase;
     }
 
     .checkpoint-title{
-      margin:0 0 9px;
-      font-size:clamp(24px,5.5vw,36px);
+      max-width:560px;
+      margin:0 auto 18px;
+      font-size:clamp(30px,7vw,45px);
       line-height:1.08;
-      letter-spacing:-.025em;
+      letter-spacing:-.04em;
     }
 
     .checkpoint-copy{
       max-width:540px;
-      margin:0 auto 18px;
+      margin:0 auto;
       color:var(--soft);
-      font-size:15px;
-      line-height:1.45;
+      font-size:19px;
+      line-height:1.55;
     }
 
-    .continue-btn,.result-btn,.buy-btn{
+    .continue-btn,
+    .result-btn,
+    .buy-btn{
       width:100%;
       border:0;
-      border-radius:12px;
+      border-radius:14px;
       background:linear-gradient(180deg,#ef2222,var(--red-dark));
       color:#fff;
-      padding:16px 18px;
-      font-size:16px;
+      padding:18px 20px;
+      font-size:18px;
       font-weight:900;
       text-align:center;
       text-decoration:none;
       cursor:pointer;
-      box-shadow:0 12px 26px rgba(217,0,0,.24);
+      box-shadow:0 6px 0 #850000;
       transition:filter .14s ease,transform .14s ease;
     }
 
-    .continue-btn:hover,.result-btn:hover,.buy-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
-
-    .result-stage{
-      display:none;
-      text-align:center;
-      padding:5px 0 1px;
+    .continue-btn,
+    .result-btn{
+      margin-top:auto;
     }
 
-    .result-stage.show{display:block}
+    .continue-btn:hover,
+    .result-btn:hover,
+    .buy-btn:hover{
+      filter:brightness(1.05);
+      transform:translateY(-1px);
+    }
 
     .result-tag{
       display:inline-flex;
-      margin-bottom:12px;
-      padding:7px 10px;
+      align-self:center;
+      margin-bottom:18px;
+      padding:8px 12px;
       border-radius:999px;
       background:#fff0f0;
       color:var(--red-dark);
-      font-size:11px;
+      font-size:12px;
       font-weight:900;
       letter-spacing:.08em;
       text-transform:uppercase;
     }
 
     .result-title{
-      margin:0 0 10px;
-      font-size:clamp(28px,6.6vw,44px);
-      line-height:1.04;
-      letter-spacing:-.035em;
+      max-width:590px;
+      margin:0 auto 18px;
+      font-size:clamp(31px,7vw,46px);
+      line-height:1.06;
+      letter-spacing:-.04em;
     }
 
     .result-copy{
-      max-width:560px;
-      margin:0 auto 19px;
+      max-width:550px;
+      margin:0 auto 24px;
       color:var(--soft);
-      font-size:16px;
-      line-height:1.5;
+      font-size:18px;
+      line-height:1.55;
     }
 
     .result-insight{
-      max-width:580px;
-      margin:0 auto 20px;
-      padding:14px 15px;
-      border-left:4px solid var(--red);
-      border-radius:8px;
-      background:#f8f9fb;
+      max-width:560px;
+      margin:0 auto;
+      padding:18px 20px;
+      border-left:5px solid var(--red);
+      border-radius:10px;
+      background:var(--page);
       color:var(--ink);
-      font-size:14px;
+      font-size:17px;
       font-weight:800;
+      line-height:1.5;
       text-align:left;
     }
 
     .sales-page{
       display:none;
+      min-height:100vh;
       background:var(--black);
       color:#f4f1ec;
     }
@@ -282,7 +289,7 @@
     }
 
     .sales-eyebrow{
-      margin:0 0 10px;
+      margin:0 0 11px;
       color:#ff5b5b;
       font-size:12px;
       font-weight:900;
@@ -291,8 +298,8 @@
     }
 
     .sales-title{
-      margin:0 0 14px;
-      font-size:clamp(34px,7vw,64px);
+      margin:0 0 16px;
+      font-size:clamp(36px,7vw,64px);
       line-height:1.02;
       letter-spacing:-.04em;
     }
@@ -303,27 +310,28 @@
       max-width:680px;
       margin:0 auto;
       color:#b8bdc7;
-      font-size:clamp(16px,2.5vw,20px);
-      line-height:1.5;
+      font-size:clamp(17px,2.5vw,20px);
+      line-height:1.55;
     }
 
     .personal-note{
       max-width:690px;
-      margin:24px auto 0;
-      padding:16px 17px;
+      margin:26px auto 0;
+      padding:18px 19px;
       border:1px solid rgba(255,255,255,.10);
-      border-left:4px solid #ff4d4d;
-      border-radius:10px;
+      border-left:5px solid #ff4d4d;
+      border-radius:11px;
       background:#151820;
       color:#fff;
-      font-size:15px;
+      font-size:16px;
       font-weight:750;
+      line-height:1.5;
       text-align:left;
     }
 
     .product-block{
       max-width:760px;
-      margin:28px auto 0;
+      margin:30px auto 0;
       padding:clamp(22px,4vw,34px);
       border:1px solid rgba(255,255,255,.10);
       border-radius:18px;
@@ -333,13 +341,13 @@
     .mockup{
       width:100%;
       max-width:680px;
-      margin:0 auto 20px;
+      margin:0 auto 22px;
       object-fit:contain;
     }
 
     .product-title{
-      margin:0 0 12px;
-      font-size:clamp(28px,5vw,42px);
+      margin:0 0 13px;
+      font-size:clamp(29px,5vw,42px);
       line-height:1.05;
       text-align:center;
       letter-spacing:-.03em;
@@ -350,43 +358,56 @@
       margin:0 auto;
       color:#c5c9d1;
       font-size:16px;
-      line-height:1.5;
+      line-height:1.55;
       text-align:center;
     }
 
     .benefits{
       display:grid;
-      gap:10px;
+      gap:13px;
       max-width:620px;
-      margin:20px auto 0;
+      margin:24px auto 0;
       padding:0;
       list-style:none;
     }
 
     .benefits li{
       position:relative;
-      padding:13px 14px 13px 42px;
-      border:1px solid rgba(255,255,255,.09);
-      border-radius:10px;
+      padding:17px 17px 17px 50px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:12px;
       background:#171b23;
-      color:#f4f1ec;
-      font-size:15px;
-      font-weight:700;
+      text-align:left;
     }
 
     .benefits li::before{
       content:'✓';
       position:absolute;
-      left:14px;
-      top:11px;
+      left:17px;
+      top:16px;
       color:#61d394;
-      font-size:19px;
+      font-size:20px;
       font-weight:900;
+    }
+
+    .benefits strong{
+      display:block;
+      margin-bottom:4px;
+      color:#fff;
+      font-size:18px;
+      line-height:1.2;
+    }
+
+    .benefits span{
+      display:block;
+      color:#aeb4bf;
+      font-size:14px;
+      line-height:1.45;
     }
 
     .offer{
       max-width:620px;
-      margin:24px auto 0;
+      margin:28px auto 0;
       text-align:center;
     }
 
@@ -400,8 +421,8 @@
     }
 
     .price{
-      margin:5px 0 16px;
-      font-size:62px;
+      margin:7px 0 18px;
+      font-size:66px;
       font-weight:900;
       line-height:1;
     }
@@ -416,14 +437,14 @@
     .buy-btn{display:block}
 
     .offer-note{
-      margin:11px 0 0;
+      margin:13px 0 0;
       color:#858c98;
       font-size:12px;
     }
 
     .legal{
       max-width:700px;
-      margin:28px auto 0;
+      margin:30px auto 0;
       color:#6e7480;
       font-size:11px;
       line-height:1.5;
@@ -433,52 +454,64 @@
     .hidden{display:none!important}
 
     @media(max-width:480px){
-      .quiz-view{padding-top:12px}
-      .quiz-intro{margin-bottom:10px}
-      .quiz-card{padding:17px 15px}
-      .progress-row{margin-bottom:15px}
-      .question{margin-bottom:13px}
-      .answers{gap:8px}
-      .answer{min-height:50px;padding:12px 13px;font-size:14px}
-      .checkpoint-copy{font-size:14px}
-      .sales-wrap{padding-top:34px}
-      .product-block{padding:20px 15px}
+      .quiz-shell{padding:18px 18px calc(18px + env(safe-area-inset-bottom))}
+      .quiz-screen{padding-top:34px}
+      .question{margin-bottom:24px;font-size:31px}
+      .answers{gap:12px}
+      .answer{min-height:62px;padding:16px 17px;font-size:17px}
+      .checkpoint,.result-stage{padding-top:44px}
+      .checkpoint-copy,.result-copy{font-size:17px}
+      .result-insight{font-size:16px}
+      .sales-wrap{padding-top:36px}
+      .product-block{padding:21px 15px}
+    }
+
+    @media(max-height:700px) and (max-width:480px){
+      .quiz-shell{padding-top:14px}
+      .quiz-screen{padding-top:24px}
+      .question{font-size:28px;margin-bottom:18px}
+      .answers{gap:9px}
+      .answer{min-height:54px;padding:13px 15px;font-size:16px}
+      .checkpoint,.result-stage{padding-top:28px}
+      .check-icon{width:58px;height:58px;margin-bottom:18px;font-size:28px}
+      .checkpoint-title{font-size:30px}
+      .checkpoint-copy,.result-copy{font-size:16px}
+      .continue-btn,.result-btn{padding:15px 18px;font-size:17px}
     }
   </style>
 </head>
 <body>
   <main class="quiz-view" id="quizView">
     <div class="quiz-shell">
-      <div class="quiz-intro">
-        <p class="quiz-label">Diagnóstico de 60 segundos</p>
-        <h1 class="quiz-title">¿Qué está apagando la conversación?</h1>
+      <div class="quiz-top">
+        <div class="quiz-meta">
+          <p class="quiz-label">Diagnóstico de chat</p>
+          <span class="progress-count" id="progressCount">1 de 4</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
       </div>
 
-      <section class="quiz-card" aria-live="polite">
-        <div id="questionStage">
-          <div class="progress-row">
-            <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
-            <span class="progress-count" id="progressCount">1 de 4</span>
-          </div>
-          <h2 class="question" id="questionText"></h2>
-          <div class="answers" id="answers"></div>
-        </div>
+      <section class="quiz-screen" id="questionStage" aria-live="polite">
+        <h1 class="question" id="questionText"></h1>
+        <div class="answers" id="answers"></div>
+      </section>
 
-        <div class="checkpoint" id="checkpointStage">
-          <div class="check-icon">✓</div>
-          <p class="checkpoint-kicker">Bien. Esto aclara algo importante.</p>
-          <h2 class="checkpoint-title" id="checkpointTitle"></h2>
-          <p class="checkpoint-copy" id="checkpointCopy"></p>
-          <button class="continue-btn" id="continueBtn" type="button">Continuar</button>
-        </div>
+      <section class="checkpoint" id="checkpointStage">
+        <div class="check-icon">✓</div>
+        <p class="checkpoint-kicker">Bien. Esto aclara algo.</p>
+        <h2 class="checkpoint-title" id="checkpointTitle"></h2>
+        <p class="checkpoint-copy" id="checkpointCopy"></p>
+        <button class="continue-btn" id="continueBtn" type="button">Continuar</button>
+      </section>
 
-        <div class="result-stage" id="resultStage">
-          <span class="result-tag">Tu resultado</span>
-          <h2 class="result-title" id="resultTitle"></h2>
-          <p class="result-copy" id="resultCopy"></p>
-          <div class="result-insight" id="resultInsight"></div>
-          <button class="result-btn" id="showPlanBtn" type="button">Ver mi recomendación</button>
-        </div>
+      <section class="result-stage" id="resultStage">
+        <span class="result-tag">Tu resultado</span>
+        <h2 class="result-title" id="resultTitle"></h2>
+        <p class="result-copy" id="resultCopy"></p>
+        <div class="result-insight" id="resultInsight"></div>
+        <button class="result-btn" id="showPlanBtn" type="button">Ver mi recomendación</button>
       </section>
     </div>
   </main>
@@ -499,9 +532,9 @@
         <p class="product-copy">Una guía corta con mensajes exactos para reactivar su curiosidad cuando responde corto, tarda demasiado o la conversación perdió toda la energía.</p>
 
         <ul class="benefits">
-          <li>7 mensajes para 7 situaciones reales.</li>
-          <li>Cuándo enviarlos y cuándo no escribir nada.</li>
-          <li>Qué hacer según la respuesta que recibas.</li>
+          <li id="benefit1"></li>
+          <li id="benefit2"></li>
+          <li id="benefit3"></li>
         </ul>
 
         <div class="offer">
@@ -517,74 +550,92 @@
   </section>
 
   <script>
-    const questions = [
+    const questions=[
       {
         text:'¿Qué cambió primero?',
         answers:[
-          {text:'Empezó a responder con “jaja”, “sí” o “bien”.',type:'short',title:'Las respuestas cortas cambian el ritmo.',copy:'No siempre significan rechazo. Pero seguir haciendo preguntas suele volver la charla todavía más pesada.'},
-          {text:'Empezó a tardar horas o días.',type:'delay',title:'La demora crea ansiedad.',copy:'El error común es intentar compensarla escribiendo más. Eso casi siempre añade presión.'},
-          {text:'Me dejó en visto.',type:'seen',title:'Un visto no se discute.',copy:'Reclamar o insistir solo empeora la posición. La reentrada tiene que ser limpia o no hacerse.'},
-          {text:'La charla iba bien y de repente murió.',type:'dead',title:'La energía se perdió.',copy:'Cuando una charla se apaga, más preguntas no la reviven. Hace falta cambiar la dirección.'}
+          {text:'Ahora responde con “jaja”, “sí” o “bien”.',type:'short',title:'Las respuestas cortas cambiaron el ritmo.',copy:'No siempre significan rechazo. Pero otra pregunta suele hacer que la charla pese más.'},
+          {text:'Ahora tarda horas o días.',type:'delay',title:'La demora está creando presión.',copy:'Escribir más para compensar casi siempre añade ansiedad. No interés.'},
+          {text:'Me dejó en visto.',type:'seen',title:'Un visto no se discute.',copy:'Reclamar o insistir empeora todo. La reentrada debe ser limpia o no hacerse.'},
+          {text:'La charla iba bien y murió.',type:'dead',title:'La conversación perdió energía.',copy:'Más preguntas no la reviven. Hace falta cambiar la dirección.'}
         ]
       },
       {
-        text:'¿Qué haces cuando notas que se enfría?',
+        text:'¿Qué haces cuando se enfría?',
         answers:[
-          {text:'Mando otra pregunta para que siga hablando.',behavior:'interview',title:'Estás intentando salvarla con esfuerzo.',copy:'Pero cuando el chat ya pesa, otra pregunta puede hacerlo sentir como una entrevista.'},
-          {text:'Espero, pero reviso el teléfono todo el tiempo.',behavior:'overthink',title:'El problema se muda a tu cabeza.',copy:'Mientras más lo piensas, más difícil se vuelve enviar algo natural y simple.'},
-          {text:'Mando más de un mensaje y luego me arrepiento.',behavior:'chase',title:'La ansiedad termina hablando por ti.',copy:'Un mensaje puede abrir curiosidad. Tres seguidos suelen cerrarla.'},
-          {text:'No escribo nada por miedo a parecer necesitado.',behavior:'freeze',title:'Te quedas quieto para no equivocarte.',copy:'Eso evita un mal mensaje, pero también puede dejar morir una conversación que aún tenía espacio.'}
+          {text:'Mando otra pregunta.',behavior:'interview',title:'Estás intentando salvarla con esfuerzo.',copy:'Pero otra pregunta puede hacer que se sienta como una entrevista.'},
+          {text:'Espero, pero pienso demasiado.',behavior:'overthink',title:'El problema se muda a tu cabeza.',copy:'Mientras más lo piensas, más difícil se vuelve escribir algo natural.'},
+          {text:'Mando varios mensajes.',behavior:'chase',title:'La ansiedad termina escribiendo por ti.',copy:'Un mensaje puede abrir curiosidad. Tres seguidos suelen cerrarla.'},
+          {text:'No escribo por miedo.',behavior:'freeze',title:'Te quedas quieto para no fallar.',copy:'Eso evita un mal mensaje, pero también puede dejar morir una oportunidad.'}
         ]
       },
       {
         text:'¿Qué te preocupa más?',
         answers:[
           {text:'Parecer desesperado.',fear:'needy',title:'Quieres avanzar sin perder dignidad.',copy:'La solución no es actuar frío. Es saber qué decir y después dejar espacio.'},
-          {text:'Perder la oportunidad por esperar demasiado.',fear:'late',title:'No quieres llegar tarde.',copy:'El momento importa, pero no necesitas correr. Necesitas una señal clara y un movimiento simple.'},
-          {text:'Volver a aburrirla.',fear:'boring',title:'Sabes que la charla perdió fuerza.',copy:'Cambiar el tema no basta. El mensaje debe cambiar la emoción de la conversación.'},
-          {text:'Empeorar algo que todavía se puede recuperar.',fear:'ruin',title:'Quieres reparar sin empujar.',copy:'Eso exige precisión: un mensaje adecuado y luego observar si ella también participa.'}
+          {text:'Esperar demasiado.',fear:'late',title:'No quieres llegar tarde.',copy:'No necesitas correr. Necesitas una señal clara y un movimiento simple.'},
+          {text:'Volver a aburrirla.',fear:'boring',title:'Sabes que la charla perdió fuerza.',copy:'Cambiar el tema no basta. El mensaje debe cambiar la emoción.'},
+          {text:'Empeorar lo que queda.',fear:'ruin',title:'Quieres reparar sin empujar.',copy:'Eso exige precisión: un mensaje adecuado y luego observar su respuesta.'}
         ]
       },
       {
-        text:'¿Qué te ayudaría más ahora?',
+        text:'¿Qué necesitas ahora?',
         answers:[
-          {text:'Mensajes exactos para adaptar.',need:'scripts',title:'No necesitas más teoría.',copy:'Necesitas ejemplos claros que puedas adaptar a la situación que tienes enfrente.'},
-          {text:'Saber cuándo escribir y cuándo callar.',need:'timing',title:'El momento es parte del mensaje.',copy:'Las palabras correctas enviadas por ansiedad todavía pueden salir mal.'},
-          {text:'Saber qué hacer si responde fría o no responde.',need:'next',title:'Necesitas un plan después de enviar.',copy:'El verdadero control viene de saber qué hacer con cada tipo de respuesta.'},
-          {text:'Una solución corta y práctica.',need:'simple',title:'Perfecto. Eso elimina el ruido.',copy:'La mejor guía aquí es la que puedes abrir, entender y usar en pocos minutos.'}
+          {text:'Mensajes exactos.',need:'scripts',title:'No necesitas más teoría.',copy:'Necesitas ejemplos claros que puedas adaptar a tu situación.'},
+          {text:'Saber cuándo escribir.',need:'timing',title:'El momento también importa.',copy:'Las palabras correctas enviadas por ansiedad todavía pueden salir mal.'},
+          {text:'Saber qué hacer después.',need:'next',title:'Necesitas un plan completo.',copy:'La calma llega cuando sabes qué hacer con cada tipo de respuesta.'},
+          {text:'Algo corto y práctico.',need:'simple',title:'Perfecto. Menos ruido.',copy:'La mejor guía es la que puedes abrir, entender y usar en minutos.'}
         ]
       }
     ];
 
-    const profiles = {
+    const profiles={
       short:{
-        result:'Estás atrapado en una conversación de respuestas mínimas.',
-        copy:'Ella responde, pero no te da nada para seguir. Entonces tú haces más esfuerzo y el chat empieza a sentirse forzado.',
-        insight:'Tu mejor movimiento no es otra pregunta. Es un mensaje que cambie la energía y le dé una razón real para participar.',
+        result:'Estás cargando tú solo con la conversación.',
+        copy:'Ella responde lo mínimo. Entonces tú haces más esfuerzo y el chat empieza a sentirse forzado.',
+        insight:'Tu mejor movimiento no es otra pregunta. Es un mensaje que cambie la energía y le dé una razón para participar.',
         salesTitle:'Deja de cargar tú solo con <span>toda la conversación</span>.',
-        salesSub:'Necesitas un mensaje que rompa el patrón de “jaja”, “sí” y “bien” sin parecer molesto ni necesitado.'
+        salesSub:'Necesitas un mensaje que rompa el patrón de “jaja”, “sí” y “bien” sin parecer molesto ni necesitado.',
+        benefit:{title:'Rompe el patrón de “jaja”.',copy:'Usa un mensaje que invite a participar sin perseguirla.'}
       },
       delay:{
         result:'La demora está controlando tu manera de escribir.',
-        copy:'Cuando tarda, empiezas a pensar demasiado. Y cuando respondes, ya no escribes con calma: escribes para recuperar seguridad.',
+        copy:'Cuando tarda, piensas demasiado. Y cuando respondes, ya no escribes con calma.',
         insight:'Tu mejor movimiento es saber cuándo entrar, qué decir y cuándo volver a dejar espacio.',
         salesTitle:'No conviertas cada demora en <span>una crisis de WhatsApp</span>.',
-        salesSub:'Necesitas mensajes que funcionen sin perseguirla y reglas claras para saber cuándo esperar.'
+        salesSub:'Necesitas mensajes que funcionen sin perseguirla y reglas claras para saber cuándo esperar.',
+        benefit:{title:'Escribe sin perseguir.',copy:'Ten un movimiento claro aunque tarde horas en responder.'}
       },
       seen:{
-        result:'Necesitas volver a entrar sin reclamar ni perseguir.',
+        result:'Necesitas volver a entrar sin reclamar.',
         copy:'El visto te deja entre dos miedos: escribir de más o no volver a escribir nunca.',
-        insight:'Tu mejor movimiento es una reentrada limpia que no pida explicaciones y que te permita medir si todavía existe interés.',
+        insight:'Tu mejor movimiento es una reentrada limpia que no pida explicaciones y mida si todavía hay interés.',
         salesTitle:'Vuelve a entrar sin convertir el “visto” en <span>un interrogatorio</span>.',
-        salesSub:'Necesitas un mensaje breve que abra una nueva puerta sin rogar atención ni pedir explicaciones.'
+        salesSub:'Necesitas un mensaje breve que abra una nueva puerta sin rogar atención.',
+        benefit:{title:'Vuelve a entrar sin reclamar.',copy:'Abre una nueva conversación sin pedir explicaciones.'}
       },
       dead:{
-        result:'La conversación perdió energía, no necesariamente toda posibilidad.',
-        copy:'La charla funcionaba. Después se volvió seca, repetida o sin dirección. Intentar alargarla solo la hizo más pesada.',
+        result:'La conversación perdió energía.',
+        copy:'La charla funcionaba. Después se volvió seca, repetida o sin dirección.',
         insight:'Tu mejor movimiento es cambiar la energía con un mensaje distinto, no seguir excavando el mismo tema.',
         salesTitle:'Haz que la conversación vuelva a <span>tener vida</span>.',
-        salesSub:'Necesitas un mensaje que cambie el ritmo antes de que la charla termine convertida en otra entrevista aburrida.'
+        salesSub:'Necesitas un mensaje que cambie el ritmo antes de que la charla muera del todo.',
+        benefit:{title:'Cambia la energía del chat.',copy:'Deja de exprimir el tema que ya murió.'}
       }
+    };
+
+    const behaviorBenefits={
+      interview:{title:'Deja de entrevistarla.',copy:'Cambia preguntas vacías por mensajes con dirección.'},
+      overthink:{title:'Corta el sobreanálisis.',copy:'Sabe cuándo enviar y cuándo dejar el teléfono quieto.'},
+      chase:{title:'Evita el mensaje de más.',copy:'Envía uno con intención y no lo entierres con otros tres.'},
+      freeze:{title:'Deja de quedarte paralizado.',copy:'Reconoce cuándo sí vale la pena hacer un movimiento.'}
+    };
+
+    const needBenefits={
+      scripts:{title:'Abre, adapta y envía.',copy:'Recibe ejemplos claros para tu situación exacta.'},
+      timing:{title:'Domina el momento.',copy:'Aprende cuándo escribir y cuándo no tocar nada.'},
+      next:{title:'Sabe qué hacer después.',copy:'Ten un plan para una respuesta cálida, fría o ninguna.'},
+      simple:{title:'Úsalo en minutos.',copy:'Sin teoría larga. Elige tu situación y aplica.'}
     };
 
     let current=0;
@@ -643,12 +694,16 @@
 
     function behaviorNote(){
       const notes={
-        interview:'Además, tiendes a hacer más preguntas cuando notas distancia. Eso puede hacer que ella sienta más trabajo, no más interés.',
-        overthink:'Además, estás dejando que el tiempo de respuesta decida cómo te sientes. Una regla clara evita esa montaña rusa.',
-        chase:'Además, tu reacción natural es escribir de más. Necesitas un mensaje y un plan para no sabotearlo después.',
-        freeze:'Además, te frenas por miedo a parecer necesitado. Necesitas saber cuándo sí vale la pena hacer un movimiento.'
+        interview:'Por tus respuestas, tiendes a hacer más preguntas cuando notas distancia. Eso puede hacer que ella sienta más trabajo, no más interés.',
+        overthink:'Por tus respuestas, el tiempo que tarda termina controlando cómo escribes. Una regla clara corta esa montaña rusa.',
+        chase:'Por tus respuestas, tu reacción natural es escribir de más. Necesitas un mensaje fuerte y un plan para no sabotearlo después.',
+        freeze:'Por tus respuestas, te frenas por miedo a parecer necesitado. Necesitas saber cuándo sí vale la pena actuar.'
       };
       return notes[data.behavior]||'';
+    }
+
+    function setBenefit(id,item){
+      document.getElementById(id).innerHTML=`<strong>${item.title}</strong><span>${item.copy}</span>`;
     }
 
     function showResult(){
@@ -661,6 +716,10 @@
       document.getElementById('salesTitle').innerHTML=p.salesTitle;
       document.getElementById('salesSub').textContent=p.salesSub;
       document.getElementById('personalNote').textContent=behaviorNote();
+
+      setBenefit('benefit1',p.benefit);
+      setBenefit('benefit2',behaviorBenefits[data.behavior]||behaviorBenefits.overthink);
+      setBenefit('benefit3',needBenefits[data.need]||needBenefits.simple);
     }
 
     document.getElementById('showPlanBtn').addEventListener('click',()=>{
