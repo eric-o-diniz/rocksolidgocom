@@ -1,0 +1,432 @@
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Missão Novos Sabores — Trilha Sensorial</title> <meta name="description" content="Transforme o momento de experimentar um alimento novo em uma brincadeira leve, curiosa e divertida com a Missão Novos Sabores." > <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" >
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '884418354690521');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=884418354690521&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style> :root { --creme: #fffaf0; --creme-escuro: #fff3da; --verde: #5e9270; --verde-escuro: #386348; --verde-claro: #eaf4ec; --laranja: #f5a950; --laranja-claro: #fff0d7; --amarelo: #f6c65b; --texto: #343a36; --texto-suave: #667069; --branco: #ffffff; --borda: #e8e7df; --sombra: 0 18px 45px rgba(68, 88, 72, 0.1); --sombra-suave: 0 10px 28px rgba(68, 88, 72, 0.08); --raio: 24px; --raio-menor: 16px; --largura: 1100px; } * { box-sizing: border-box; margin: 0; padding: 0; } html { scroll-behavior: smooth; } body { background: var(--creme); color: var(--texto); font-family: "Poppins", sans-serif; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; } img { display: block; max-width: 100%; } a { color: inherit; text-decoration: none; } button, a { -webkit-tap-highlight-color: transparent; } .container { width: min(calc(100% - 36px), var(--largura)); margin-inline: auto; } .top-bar { padding: 11px 18px; background: var(--verde-escuro); color: var(--branco); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.01em; text-align: center; } section { padding: 68px 0; } .section-tag { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 16px; padding: 7px 13px; border-radius: 999px; background: var(--verde-claro); color: var(--verde-escuro); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; } h1, h2, h3 { color: var(--texto); font-family: "Nunito", sans-serif; line-height: 1.15; } h1 { max-width: 800px; margin-inline: auto; font-size: clamp(2.25rem, 8vw, 4.4rem); font-weight: 900; letter-spacing: -0.045em; } h2 { font-size: clamp(1.85rem, 6vw, 3rem); font-weight: 900; letter-spacing: -0.035em; } h3 { font-size: 1.2rem; font-weight: 800; } p { color: var(--texto-suave); } .section-heading { max-width: 720px; margin-bottom: 34px; } .section-heading.centered { margin-inline: auto; text-align: center; } .section-heading p { margin-top: 16px; font-size: 1.02rem; } .hero { position: relative; overflow: hidden; padding: 72px 0 78px; text-align: center; } .hero::before, .hero::after { position: absolute; z-index: -1; border-radius: 50%; content: ""; filter: blur(3px); opacity: 0.55; } .hero::before { top: 20px; left: -100px; width: 260px; height: 260px; background: var(--laranja-claro); } .hero::after { right: -90px; bottom: 80px; width: 230px; height: 230px; background: var(--verde-claro); } .hero-label { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 19px; padding: 8px 15px; border: 1px solid rgba(94, 146, 112, 0.18); border-radius: 999px; background: rgba(255, 255, 255, 0.75); color: var(--verde-escuro); font-size: 0.82rem; font-weight: 700; box-shadow: var(--sombra-suave); } .hero-label span { font-size: 1rem; } .hero-subheadline { max-width: 730px; margin: 22px auto 32px; color: var(--texto-suave); font-size: clamp(1rem, 3.8vw, 1.18rem); } .hero-subheadline strong { color: var(--verde-escuro); font-weight: 700; } .product-showcase { position: relative; max-width: 780px; margin: 38px auto 34px; padding: 15px; border: 1px solid rgba(82, 102, 87, 0.1); border-radius: 30px; background: var(--branco); box-shadow: var(--sombra); } .product-showcase::before { position: absolute; top: -12px; right: 24px; padding: 7px 13px; border-radius: 999px; background: var(--laranja); color: #4c3317; content: "PDF para imprimir"; font-size: 0.75rem; font-weight: 700; box-shadow: 0 8px 18px rgba(130, 82, 25, 0.14); } .product-showcase img { width: 100%; min-height: 280px; border-radius: 19px; background: linear-gradient(135deg, var(--verde-claro), var(--laranja-claro)); object-fit: contain; } .button { display: inline-flex; min-height: 58px; align-items: center; justify-content: center; gap: 10px; padding: 16px 26px; border: 0; border-radius: 16px; background: var(--verde-escuro); color: var(--branco); font-family: "Poppins", sans-serif; font-size: 0.92rem; font-weight: 700; line-height: 1.35; text-align: center; box-shadow: 0 13px 25px rgba(56, 99, 72, 0.24); cursor: pointer; transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; } .button:hover { background: #2f573d; box-shadow: 0 16px 30px rgba(56, 99, 72, 0.3); transform: translateY(-2px); } .button:active { transform: translateY(0); } .button:focus-visible { outline: 3px solid rgba(245, 169, 80, 0.65); outline-offset: 4px; } .button svg { width: 19px; height: 19px; flex: 0 0 auto; } .hero-note { margin-top: 15px; font-size: 0.82rem; } .problem { background: var(--branco); } .problem-grid { display: grid; gap: 28px; align-items: center; } .problem-copy p + p { margin-top: 17px; } .problem-list { display: grid; gap: 13px; margin-top: 25px; list-style: none; } .problem-list li { display: flex; gap: 12px; align-items: flex-start; padding: 17px; border: 1px solid var(--borda); border-radius: var(--raio-menor); background: var(--creme); color: var(--texto); font-size: 0.94rem; } .check-icon { display: grid; width: 25px; height: 25px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: var(--laranja-claro); color: #8d581c; font-size: 0.8rem; font-weight: 800; } .gentle-card { padding: 28px; border-radius: var(--raio); background: radial-gradient(circle at top right, rgba(246, 198, 91, 0.25), transparent 35%), var(--verde-claro); } .gentle-card .quote-mark { margin-bottom: 10px; color: var(--verde); font-family: Georgia, serif; font-size: 3.4rem; line-height: 0.7; } .gentle-card p { color: var(--verde-escuro); font-family: "Nunito", sans-serif; font-size: 1.35rem; font-weight: 800; line-height: 1.35; } .solution { padding-bottom: 75px; } .central-phrase { max-width: 810px; margin: 0 auto 36px; color: var(--verde-escuro); font-family: "Nunito", sans-serif; font-size: clamp(1.45rem, 5vw, 2.25rem); font-weight: 900; line-height: 1.3; text-align: center; } .sensory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; } .sensory-card { padding: 21px 15px; border: 1px solid var(--borda); border-radius: 19px; background: var(--branco); text-align: center; box-shadow: var(--sombra-suave); } .sensory-icon { display: grid; width: 52px; height: 52px; margin: 0 auto 12px; place-items: center; border-radius: 17px; background: var(--laranja-claro); font-size: 1.55rem; } .sensory-card:nth-child(even) .sensory-icon { background: var(--verde-claro); } .sensory-card p { margin-top: 5px; font-size: 0.82rem; } .solution-note { max-width: 730px; margin: 30px auto 0; text-align: center; } .solution-note strong { color: var(--texto); } .how-it-works { background: var(--verde-escuro); } .how-it-works h2, .how-it-works .section-heading p { color: var(--branco); } .how-it-works .section-tag { background: rgba(255, 255, 255, 0.12); color: #eff8f1; } .steps { display: grid; gap: 16px; counter-reset: passos; } .step { position: relative; padding: 26px 22px; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 21px; background: rgba(255, 255, 255, 0.08); counter-increment: passos; } .step-number { display: grid; width: 42px; height: 42px; margin-bottom: 16px; place-items: center; border-radius: 14px; background: var(--laranja); color: #4f3518; font-family: "Nunito", sans-serif; font-size: 1.1rem; font-weight: 900; } .step h3 { color: var(--branco); } .step p { margin-top: 7px; color: rgba(255, 255, 255, 0.76); font-size: 0.9rem; } .benefit { text-align: center; } .benefit-card { max-width: 850px; margin-inline: auto; padding: 34px 25px; border: 1px solid rgba(245, 169, 80, 0.25); border-radius: 28px; background: radial-gradient(circle at 10% 10%, rgba(246, 198, 91, 0.2), transparent 30%), var(--branco); box-shadow: var(--sombra); } .benefit-icon { display: grid; width: 65px; height: 65px; margin: 0 auto 20px; place-items: center; border-radius: 21px; background: var(--laranja-claro); font-size: 2rem; transform: rotate(-3deg); } .benefit-card h2 { max-width: 710px; margin-inline: auto; } .benefit-card p { max-width: 690px; margin: 18px auto 0; } .included { background: var(--branco); } .included-layout { display: grid; gap: 28px; align-items: start; } .included-list { display: grid; gap: 12px; list-style: none; } .included-list li { display: flex; gap: 12px; align-items: flex-start; color: var(--texto); font-size: 0.94rem; } .included-list svg { width: 22px; height: 22px; flex: 0 0 auto; margin-top: 2px; color: var(--verde); } .delivery-card { padding: 27px; border: 1px solid var(--borda); border-radius: var(--raio); background: var(--creme); } .delivery-card-icon { display: grid; width: 54px; height: 54px; margin-bottom: 16px; place-items: center; border-radius: 17px; background: var(--verde-claro); color: var(--verde-escuro); } .delivery-card-icon svg { width: 27px; height: 27px; } .delivery-card p { margin-top: 8px; font-size: 0.92rem; } .digital-warning { margin-top: 20px; padding: 12px 14px; border-radius: 12px; background: var(--laranja-claro); color: #715023; font-size: 0.78rem; font-weight: 600; } .for-who { padding: 55px 0; } .for-who-card { display: grid; gap: 20px; align-items: center; padding: 28px; border-radius: 26px; background: var(--verde-claro); } .for-who-card h2 { font-size: clamp(1.7rem, 5vw, 2.35rem); } .for-who-card p { margin-top: 10px; color: var(--verde-escuro); } .for-who-visual { display: grid; width: 92px; height: 92px; place-items: center; border-radius: 28px; background: var(--branco); font-size: 2.8rem; box-shadow: var(--sombra-suave); } .offer { padding-top: 35px; } .offer-card { position: relative; max-width: 800px; margin-inline: auto; overflow: hidden; padding: 37px 24px; border: 1px solid rgba(94, 146, 112, 0.2); border-radius: 30px; background: var(--branco); text-align: center; box-shadow: var(--sombra); } .offer-card::before { position: absolute; top: -80px; right: -80px; width: 190px; height: 190px; border-radius: 50%; background: var(--laranja-claro); content: ""; } .offer-card::after { position: absolute; bottom: -85px; left: -85px; width: 190px; height: 190px; border-radius: 50%; background: var(--verde-claro); content: ""; } .offer-content { position: relative; z-index: 1; } .offer-eyebrow { color: var(--verde-escuro); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; } .offer-card h2 { margin-top: 10px; } .old-price { margin-top: 25px; color: var(--texto-suave); font-size: 0.93rem; } .old-price span { text-decoration: line-through; } .current-price-label { margin-top: 4px; color: var(--texto); font-size: 0.85rem; font-weight: 600; } .current-price { margin: 3px 0 24px; color: var(--verde-escuro); font-family: "Nunito", sans-serif; font-size: clamp(2.8rem, 11vw, 4.8rem); font-weight: 900; line-height: 1; letter-spacing: -0.04em; } .offer-card .button { width: 100%; max-width: 500px; } .payment-note { margin-top: 16px; color: var(--texto-suave); font-size: 0.77rem; font-weight: 500; } .faq { background: var(--branco); } .faq-list { display: grid; max-width: 790px; margin-inline: auto; gap: 12px; } details { border: 1px solid var(--borda); border-radius: 17px; background: var(--creme); transition: background-color 0.2s ease; } details[open] { background: var(--branco); box-shadow: var(--sombra-suave); } summary { display: flex; gap: 15px; align-items: center; justify-content: space-between; padding: 19px 20px; color: var(--texto); font-family: "Nunito", sans-serif; font-size: 1rem; font-weight: 800; list-style: none; cursor: pointer; } summary::-webkit-details-marker { display: none; } summary::after { display: grid; width: 28px; height: 28px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: var(--verde-claro); color: var(--verde-escuro); content: "+"; font-family: "Poppins", sans-serif; font-size: 1.1rem; transition: transform 0.2s ease; } details[open] summary::after { transform: rotate(45deg); } .faq-answer { padding: 0 20px 20px; } .faq-answer p { font-size: 0.91rem; } .final-cta { padding: 75px 0; text-align: center; } .final-cta-box { max-width: 900px; margin-inline: auto; padding: 40px 24px; border-radius: 30px; background: radial-gradient(circle at top left, rgba(246, 198, 91, 0.22), transparent 32%), var(--verde-claro); } .final-cta-box h2 { max-width: 720px; margin-inline: auto; color: var(--verde-escuro); } .final-cta-box p { max-width: 630px; margin: 17px auto 26px; color: var(--verde-escuro); } footer { padding: 25px 18px; border-top: 1px solid var(--borda); color: var(--texto-suave); font-size: 0.76rem; text-align: center; } @media (min-width: 650px) { .container { width: min(calc(100% - 56px), var(--largura)); } .button { font-size: 0.98rem; } .sensory-grid { grid-template-columns: repeat(4, 1fr); } .steps { grid-template-columns: repeat(3, 1fr); } .for-who-card { grid-template-columns: 1fr auto; padding: 35px; } .offer-card { padding: 48px 45px; } } @media (min-width: 850px) { section { padding: 90px 0; } .hero { padding: 92px 0 96px; } .problem-grid { grid-template-columns: 1.1fr 0.9fr; gap: 60px; } .included-layout { grid-template-columns: 1.25fr 0.75fr; gap: 70px; } .benefit-card { padding: 48px; } .final-cta-box { padding: 55px; } } @media (max-width: 480px) { .button { width: 100%; padding-inline: 18px; font-size: 0.84rem; } .product-showcase { margin-top: 33px; padding: 9px; border-radius: 22px; } .product-showcase img { min-height: 230px; border-radius: 15px; } .product-showcase::before { right: 11px; font-size: 0.68rem; } .sensory-card { padding-inline: 10px; } .sensory-card h3 { font-size: 1rem; } summary { font-size: 0.94rem; } } @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+
+.faq-answer img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  margin-top: 8px;
+}
+} </style> </head> <body> <header> <div class="top-bar"> Uma nova forma de apresentar alimentos ao seu filho. </div> </header> <main> <section class="hero" aria-labelledby="titulo-principal"> <div class="container"> <div class="hero-label"> <span aria-hidden="true">⭐</span> Uma missão sensorial para imprimir </div>
+    <h1 id="titulo-principal">
+      Transforme o momento de experimentar um alimento novo em uma brincadeira.
+    </h1>
+
+    <p class="hero-subheadline">
+      A <strong>Missão Novos Sabores — Trilha Sensorial</strong> conduz a criança por uma experiência de observar, tocar, cheirar e experimentar — com mais curiosidade e menos sensação de cobrança.
+    </p>
+
+    <div class="product-showcase">
+      <img src="https://rocksolidgo.com/mns/images/MNS-transparent.webp" alt="Missão Novos Sabores - Trilha Sensorial">
+    </div>
+
+    <a
+      href="https://pay.hotmart.com/W106307307V?off=y9e7ffr7&checkoutMode=10"
+      class="button"
+      aria-label="Quero tornar o momento de experimentar alimentos mais divertido"
+    >
+      QUERO TORNAR ESSE MOMENTO MAIS DIVERTIDO
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <p class="hero-note">
+      Atividade digital em PDF • Pronta para imprimir • R$27
+    </p>
+  </div>
+</section>
+
+<section class="problem" aria-labelledby="problema-titulo">
+  <div class="container problem-grid">
+    <div class="problem-copy">
+      <span class="section-tag">Talvez isso aconteça por aí</span>
+
+      <h2 id="problema-titulo">
+        O alimento chega à mesa… e o “não gosto” aparece antes da primeira tentativa.
+      </h2>
+
+      <p>
+        Você só queria apresentar algo novo. Mas, de repente, aquele momento simples parece virar uma negociação.
+      </p>
+
+      <p>
+        E você não quer transformar a refeição em discussão. Só gostaria de encontrar uma forma mais leve de despertar a curiosidade da criança.
+      </p>
+
+      <ul class="problem-list">
+        <li>
+          <span class="check-icon" aria-hidden="true">✓</span>
+          <span>Ela diz que não gosta antes mesmo de experimentar.</span>
+        </li>
+        <li>
+          <span class="check-icon" aria-hidden="true">✓</span>
+          <span>Cada alimento novo parece exigir muita conversa e negociação.</span>
+        </li>
+        <li>
+          <span class="check-icon" aria-hidden="true">✓</span>
+          <span>Você procura uma abordagem mais curiosa, participativa e divertida.</span>
+        </li>
+      </ul>
+    </div>
+
+    <aside class="gentle-card">
+      <div class="quote-mark" aria-hidden="true">“</div>
+      <p>
+        Experimentar pode começar com uma pergunta curiosa — não com uma cobrança.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<section class="solution" aria-labelledby="solucao-titulo">
+  <div class="container">
+    <div class="section-heading centered">
+      <span class="section-tag">Conheça a Trilha Sensorial</span>
+
+      <h2 id="solucao-titulo">
+        Em vez de mandar a criança comer, convide-a para investigar.
+      </h2>
+
+      <p>
+        A atividade transforma o alimento em uma pequena missão. A criança observa suas características, registra o que percebe e participa da experiência passo a passo.
+      </p>
+    </div>
+
+    <p class="central-phrase">
+      “Antes de gostar de um alimento, a criança precisa se sentir segura para conhecê-lo.”
+    </p>
+
+    <div class="sensory-grid">
+      <article class="sensory-card">
+        <div class="sensory-icon" aria-hidden="true">👀</div>
+        <h3>Olhar</h3>
+        <p>Observar cores, formas e aparência.</p>
+      </article>
+
+      <article class="sensory-card">
+        <div class="sensory-icon" aria-hidden="true">✋</div>
+        <h3>Sentir a textura</h3>
+        <p>Perceber como o alimento se sente ao toque.</p>
+      </article>
+
+      <article class="sensory-card">
+        <div class="sensory-icon" aria-hidden="true">👃</div>
+        <h3>Cheirar</h3>
+        <p>Descobrir e descrever o aroma.</p>
+      </article>
+
+      <article class="sensory-card">
+        <div class="sensory-icon" aria-hidden="true">⭐</div>
+        <h3>Experimentar</h3>
+        <p>Provar e registrar a experiência.</p>
+      </article>
+    </div>
+
+    <p class="solution-note">
+      Cada pequena interação já faz parte da missão. <strong>A criança não precisa limpar o prato</strong> para participar e completar sua experiência.
+    </p>
+  </div>
+</section>
+
+<section class="how-it-works" aria-labelledby="como-funciona-titulo">
+  <div class="container">
+    <div class="section-heading centered">
+      <span class="section-tag">Simples de usar</span>
+
+      <h2 id="como-funciona-titulo">
+        Como funciona
+      </h2>
+
+      <p>
+        Você prepara a atividade em poucos minutos e acompanha a criança durante a descoberta.
+      </p>
+    </div>
+
+    <div class="steps">
+      <article class="step">
+        <div class="step-number" aria-hidden="true">1</div>
+        <h3>Imprima a Trilha Sensorial</h3>
+        <p>
+          Abra o arquivo em PDF e imprima uma nova folha para a missão.
+        </p>
+      </article>
+
+      <article class="step">
+        <div class="step-number" aria-hidden="true">2</div>
+        <h3>Escolha um alimento novo</h3>
+        <p>
+          Escreva o nome do alimento que será observado e experimentado.
+        </p>
+      </article>
+
+      <article class="step">
+        <div class="step-number" aria-hidden="true">3</div>
+        <h3>Acompanhe a criança</h3>
+        <p>
+          Percorram juntos as etapas e registrem as descobertas da missão.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="benefit" aria-labelledby="beneficio-titulo">
+  <div class="container">
+    <div class="benefit-card">
+      <div class="benefit-icon" aria-hidden="true">🔎</div>
+
+      <h2 id="beneficio-titulo">
+        Quando experimentar vira uma brincadeira, a curiosidade pode ocupar o lugar da pressão.
+      </h2>
+
+      <p>
+        A criança participa, investiga e se envolve com o alimento de uma forma mais leve. Assim, pode ficar mais curiosa e disposta a experimentar porque aquele momento deixa de parecer uma obrigação e passa a ser uma pequena missão.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="included" aria-labelledby="recebe-titulo">
+  <div class="container included-layout">
+    <div>
+      <div class="section-heading">
+        <span class="section-tag">O que você recebe</span>
+
+        <h2 id="recebe-titulo">
+          Uma atividade prática para repetir a cada novo alimento.
+        </h2>
+
+        <p>
+          Depois de baixar o arquivo, você poderá imprimir uma nova Trilha Sensorial sempre que desejar criar outra experiência.
+        </p>
+      </div>
+
+      <ul class="included-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Arquivo digital em PDF.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Trilha Sensorial pronta para imprimir.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Espaço para registrar o nome do alimento.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Avaliação de aparência, textura, cheiro e sabor.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Sistema de estrelas para registrar a experiência.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Instruções simples de utilização.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Possibilidade de imprimir novamente para outros alimentos.</span>
+        </li>
+      </ul>
+    </div>
+
+    <aside class="delivery-card">
+      <div class="delivery-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 3h7l4 4v14H7V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M14 3v5h5M10 13h5M10 17h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <h3>Receba, baixe e imprima</h3>
+
+      <p>
+        O material é enviado em formato digital para que você possa começar a missão com praticidade.
+      </p>
+
+      <div class="digital-warning">
+        Produto digital. Nenhum material físico será enviado.
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="for-who" aria-labelledby="para-quem-titulo">
+  <div class="container">
+    <div class="for-who-card">
+      <div>
+        <h2 id="para-quem-titulo">Para quem é?</h2>
+        <p>
+          Para mães e responsáveis que desejam apresentar alimentos novos às crianças de uma maneira mais leve, participativa e divertida.
+        </p>
+      </div>
+
+      <div class="for-who-visual" aria-hidden="true">🌟</div>
+    </div>
+  </div>
+</section>
+
+<section class="offer" aria-labelledby="oferta-titulo">
+  <div class="container">
+    <div class="offer-card">
+      <div class="offer-content">
+        <p class="offer-eyebrow">Comece a primeira missão</p>
+
+        <h2 id="oferta-titulo">
+          Receba agora a Missão Novos Sabores — Trilha Sensorial
+        </h2>
+
+        <p class="old-price">
+          De <span>R$44,90</span> por:
+        </p>
+
+        <p class="current-price-label">Pagamento único de</p>
+        <div class="current-price">R$27,00</div>
+
+        <a
+          href="https://pay.hotmart.com/W106307307V?off=y9e7ffr7&checkoutMode=10"
+          class="button"
+          aria-label="Quero receber a Trilha Sensorial"
+        >
+          QUERO RECEBER A TRILHA SENSORIAL
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+
+        <p class="payment-note">
+          Pagamento seguro • Acesso digital • Imprima quando quiser
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" aria-labelledby="faq-titulo">
+  <div class="container">
+    <div class="section-heading centered">
+      <span class="section-tag">Dúvidas frequentes</span>
+      <h2 id="faq-titulo">Perguntas frequentes</h2>
+    </div>
+
+    <div class="faq-list">
+      <details>
+        <summary>Como receberei o produto?</summary>
+        <div class="faq-answer">
+          <p>
+            Você receberá acesso ao arquivo digital em PDF após a confirmação do pagamento. Depois, basta baixar e imprimir.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Posso imprimir mais de uma vez?</summary>
+        <div class="faq-answer">
+          <p>
+            Sim. Você poderá imprimir uma nova folha sempre que desejar apresentar outro alimento e realizar uma nova missão.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Para qual idade a atividade é indicada?</summary>
+        <div class="faq-answer">
+          <p>
+            A atividade pode ser usada com crianças que já consigam participar de uma experiência guiada de observação e experimentação. O responsável pode ajudar na leitura e no preenchimento sempre que necessário.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Preciso de algum material especial?</summary>
+        <div class="faq-answer">
+          <p>
+            Não. Você precisa apenas de uma impressora, uma folha de papel, um lápis ou canetinha e o alimento escolhido para a missão.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>A atividade garante que meu filho gostará do alimento?</summary>
+        <div class="faq-answer">
+          <p>
+            Não. Cada criança reage de uma forma e não é possível garantir resultados específicos. O objetivo da Trilha Sensorial é tornar o momento de conhecer e experimentar um alimento mais leve, curioso e divertido.
+          </p>
+        </div>
+      </details>
+      
+      <details>
+  <summary>Como usar? (Mais Instruções)</summary>
+  <div class="faq-answer">
+    <img 
+      src="https://rocksolidgo.com/mns/images/instrucoes.webp?_t=1781327290" 
+      alt="Instruções de uso da Missão Novos Sabores"
+      loading="lazy"
+      decoding="async"
+    >
+  </div>
+</details>
+
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" aria-labelledby="chamada-final-titulo">
+  <div class="container">
+    <div class="final-cta-box">
+      <h2 id="chamada-final-titulo">
+        Um alimento novo não precisa começar com pressão. Pode começar com curiosidade.
+      </h2>
+
+      <p>
+        Transforme a próxima experimentação em uma missão simples, participativa e divertida para vocês viverem juntos.
+      </p>
+
+      <a
+        href="https://pay.hotmart.com/W106307307V?off=y9e7ffr7&checkoutMode=10"
+        class="button"
+        aria-label="Começar a Missão Novos Sabores"
+      >
+        COMEÇAR A MISSÃO NOVOS SABORES
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
