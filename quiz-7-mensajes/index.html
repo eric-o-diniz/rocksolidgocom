@@ -442,6 +442,18 @@
       letter-spacing:-.042em;
     }
 
+    .product-name{
+      margin:0 0 22px;
+      font-size:clamp(39px,5.8vw,62px);
+      line-height:1.01;
+      letter-spacing:-.047em;
+    }
+
+    .product-name span{
+      display:block;
+      color:var(--red);
+    }
+
     .section-copy{
       max-width:520px;
       margin:0;
@@ -542,6 +554,8 @@
       letter-spacing:-.035em;
     }
 
+    .benefit-highlight{color:var(--red)}
+
     .offer-section{
       min-height:88svh;
       background:var(--dark)!important;
@@ -560,6 +574,8 @@
       line-height:1.01;
       letter-spacing:-.047em;
     }
+
+    .offer-title span{color:#ff5257}
 
     .offer-copy{
       max-width:620px;
@@ -690,7 +706,7 @@
 
       .sales-section{padding:80px 18px}
       .sales-title{font-size:43px}
-      .section-title{font-size:39px}
+      .product-name{font-size:41px}
       .section-copy{font-size:18px}
       .timeline-heading h3{font-size:41px}
       .timeline-item{grid-template-columns:56px 1fr;gap:15px;min-height:175px}
@@ -777,9 +793,9 @@
         </div>
 
         <div class="product-copy-block reveal from-right">
-          <p class="section-kicker">Una guía corta para una situación concreta</p>
-          <h3 class="section-title">Abre la guía. Elige tu caso. Envía algo con dirección.</h3>
-          <p class="section-copy">7 mensajes para cuando responde corto, tarda, te deja en visto o la charla simplemente murió.</p>
+          <p class="section-kicker">Tu recomendación</p>
+          <h3 class="product-name"><span>7 Mensajes</span> Para Revivir un Chat Frío</h3>
+          <p class="section-copy">Abre la guía, elige la situación que se parece a la tuya y envía algo con dirección.</p>
         </div>
       </div>
     </section>
@@ -927,7 +943,7 @@
         insight:'Tu mejor movimiento es dejar de pedir respuestas y enviar algo que ella quiera completar.',
         salesTitle:'Deja de recibir un “jaja” y tener que <span>salvar tú solo el chat</span>.',
         salesSub:'Tu problema no es encontrar otra pregunta. Es cambiar la energía sin parecer desesperado.',
-        benefit:'Rompe el “jaja” con una observación que le dé algo real que responder.'
+        benefit:'Rompe el “jaja” con una observación que le dé <span class="benefit-highlight">algo real que responder</span>.'
       },
       delay:{
         result:'Su demora ya está decidiendo cómo escribes.',
@@ -935,7 +951,7 @@
         insight:'Tu mejor movimiento es entrar con calma, enviar una sola vez y dejar espacio.',
         salesTitle:'No dejes que una demora convierta tu mensaje en <span>ansiedad escrita</span>.',
         salesSub:'Necesitas saber cuándo entrar, qué enviar y cuándo dejar el teléfono quieto.',
-        benefit:'Vuelve a entrar sin que parezca que llevabas horas esperando su respuesta.'
+        benefit:'Vuelve a entrar <span class="benefit-highlight">sin que parezca que llevabas horas esperando</span>.'
       },
       seen:{
         result:'El visto te dejó entre insistir o desaparecer.',
@@ -943,7 +959,7 @@
         insight:'Tu mejor movimiento es una reentrada nueva que no mencione el visto y mida si todavía existe interés.',
         salesTitle:'Reabre el chat sin convertir el visto en <span>un interrogatorio</span>.',
         salesSub:'Necesitas una entrada limpia que no pida explicaciones ni ruegue atención.',
-        benefit:'Reabre el chat sin mencionar el visto ni pedir una explicación.'
+        benefit:'Reabre el chat <span class="benefit-highlight">sin mencionar el visto ni pedir explicaciones</span>.'
       },
       dead:{
         result:'La conversación perdió energía y tú sigues buscando tema.',
@@ -951,22 +967,22 @@
         insight:'Tu mejor movimiento es dejar morir el tema viejo y abrir una emoción nueva.',
         salesTitle:'Haz que una conversación muerta vuelva a <span>tener algo que seguir</span>.',
         salesSub:'Necesitas cambiar la dirección, no seguir exprimiendo el tema que ya se acabó.',
-        benefit:'Deja morir el tema viejo y abre una conversación que vuelva a despertar curiosidad.'
+        benefit:'Deja morir el tema viejo y abre <span class="benefit-highlight">una conversación que despierte curiosidad</span>.'
       }
     };
 
     const behaviorBenefits={
-      interview:'Usa el “cambio de marco”: deja de preguntar y lanza una frase que ella quiera completar.',
-      checking:'Envía una vez, suelta el teléfono y deja que su respuesta revele el interés real.',
-      rewrite:'Ten una frase lista para enviar sin escribir, borrar y volver a empezar.',
-      freeze:'Sabe cuándo hacer un movimiento y cuándo retirarte sin quedarte con la duda.'
+      interview:'Deja de preguntar y usa una frase que <span class="benefit-highlight">ella quiera completar</span>.',
+      checking:'Envía una vez y deja que su respuesta revele <span class="benefit-highlight">el interés real</span>.',
+      rewrite:'Ten una frase lista para enviar <span class="benefit-highlight">sin escribir, borrar y volver a empezar</span>.',
+      freeze:'Sabe cuándo actuar y cuándo retirarte <span class="benefit-highlight">sin quedarte con la duda</span>.'
     };
 
     const desireBenefits={
-      energy:'Consigue una respuesta con suficiente energía para que la conversación pueda avanzar.',
-      asks:'Crea el espacio para que ella también pregunte, aporte y deje de recibir todo servido.',
-      flow:'Vuelve a una charla natural donde no tengas que inventar el siguiente tema cada minuto.',
-      clarity:'Descubre rápido si aún existe interés, sin perseguir ni vivir de señales confusas.'
+      energy:'Consigue una respuesta <span class="benefit-highlight">con ganas de seguir</span>.',
+      asks:'Haz que ella también <span class="benefit-highlight">pregunte, aporte y participe</span>.',
+      flow:'Vuelve a una charla que <span class="benefit-highlight">fluya sin inventar otro tema</span>.',
+      clarity:'Descubre rápido <span class="benefit-highlight">si todavía existe interés</span>.'
     };
 
     const feelingNotes={
@@ -982,6 +998,13 @@
       oversend:'Y si nada cambia, sabes que puedes terminar escribiendo de más.',
       lose:'Y si nada cambia, temes perder la oportunidad por completo.'
     };
+
+    function clearAnswerAt(index){
+      if(index<0||index>=questions.length)return;
+      const question=questions[index];
+      selectedIndexes[index]=null;
+      data[question.key]=null;
+    }
 
     function renderQuestion(direction='forward'){
       view='question';
@@ -1093,6 +1116,7 @@
     backBtn.addEventListener('click',()=>{
       if(view==='break'){
         breakStage.classList.remove('show');
+        clearAnswerAt(current);
         renderQuestion('back');
         return;
       }
@@ -1100,12 +1124,14 @@
       if(view==='result'){
         resultStage.classList.remove('show');
         current=questions.length-1;
+        clearAnswerAt(current);
         renderQuestion('back');
         return;
       }
 
       if(view==='question'&&current>0){
         current--;
+        clearAnswerAt(current);
         renderQuestion('back');
       }
     });
@@ -1124,9 +1150,9 @@
       document.getElementById('salesSub').textContent=p.salesSub;
       document.getElementById('personalNote').textContent=`${feelingNotes[data.feeling]||''} ${futureNotes[data.future]||''}`.trim();
 
-      document.getElementById('benefitOne').textContent=p.benefit;
-      document.getElementById('benefitTwo').textContent=behaviorBenefits[data.behavior]||behaviorBenefits.freeze;
-      document.getElementById('benefitThree').textContent=desireBenefits[data.desire]||desireBenefits.clarity;
+      document.getElementById('benefitOne').innerHTML=p.benefit;
+      document.getElementById('benefitTwo').innerHTML=behaviorBenefits[data.behavior]||behaviorBenefits.freeze;
+      document.getElementById('benefitThree').innerHTML=desireBenefits[data.desire]||desireBenefits.clarity;
 
       resultStage.animate([
         {opacity:0,transform:'translateY(22px)'},
