@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#102126">
   <title>Diagnóstico de Chat Frío | 7 Mensajes</title>
   <meta name="description" content="Responde 4 preguntas y descubre qué tipo de mensaje necesitas para reactivar una conversación fría.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,18 +12,21 @@
 
   <style>
     :root{
-      --white:#ffffff;
-      --page:#f7f8fa;
-      --ink:#17191d;
-      --soft:#606875;
-      --muted:#9299a4;
-      --line:#dfe3e8;
-      --line-dark:#c7cdd5;
-      --red:#d90000;
-      --red-dark:#aa0000;
-      --green:#16834f;
+      --quiz-bg:#102126;
+      --quiz-card:#193038;
+      --quiz-card-hover:#213d46;
+      --quiz-line:#3c5660;
+      --quiz-text:#f6f8f8;
+      --quiz-soft:#bbc8cc;
+      --quiz-muted:#7f949b;
+      --red:#e31b23;
+      --red-dark:#a90000;
+      --green:#58cc02;
       --black:#090a0d;
-      --max:650px;
+      --sales-card:#11141a;
+      --sales-card-2:#171b23;
+      --sales-line:rgba(255,255,255,.10);
+      --max:680px;
     }
 
     *{box-sizing:border-box}
@@ -31,8 +34,8 @@
 
     body{
       margin:0;
-      background:var(--white);
-      color:var(--ink);
+      background:var(--quiz-bg);
+      color:var(--quiz-text);
       font-family:Inter,Arial,sans-serif;
       line-height:1.4;
       -webkit-font-smoothing:antialiased;
@@ -45,9 +48,10 @@
 
     .quiz-view{
       min-height:100svh;
+      width:100%;
       display:flex;
       justify-content:center;
-      background:var(--white);
+      background:var(--quiz-bg);
     }
 
     .quiz-shell{
@@ -58,44 +62,43 @@
       padding:22px 24px calc(22px + env(safe-area-inset-bottom));
     }
 
-    .quiz-top{
-      flex:0 0 auto;
-    }
+    .quiz-top{flex:0 0 auto}
 
     .quiz-meta{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      margin-bottom:12px;
+      margin-bottom:13px;
     }
 
     .quiz-label{
       margin:0;
-      color:var(--soft);
+      color:var(--quiz-soft);
       font-size:13px;
       font-weight:900;
     }
 
     .progress-count{
-      color:var(--muted);
+      color:var(--quiz-soft);
       font-size:13px;
       font-weight:900;
       white-space:nowrap;
     }
 
     .progress-track{
-      height:8px;
+      height:10px;
       overflow:hidden;
       border-radius:999px;
-      background:#e9ecf0;
+      background:#31474f;
     }
 
     .progress-bar{
       width:25%;
       height:100%;
       border-radius:inherit;
-      background:var(--red);
+      background:linear-gradient(90deg,#ff4248,var(--red));
+      box-shadow:0 0 16px rgba(227,27,35,.34);
       transition:width .22s ease;
     }
 
@@ -103,31 +106,35 @@
       flex:1;
       display:flex;
       flex-direction:column;
-      padding-top:clamp(42px,8vh,82px);
+      padding-top:clamp(48px,8vh,84px);
     }
 
     .question{
-      max-width:600px;
-      margin:0 0 30px;
-      font-size:clamp(31px,7vw,45px);
+      max-width:620px;
+      margin:0 0 34px;
+      color:var(--quiz-text);
+      font-size:clamp(33px,7.2vw,47px);
       line-height:1.08;
       letter-spacing:-.04em;
     }
 
     .answers{
+      counter-reset:answer;
       display:grid;
-      gap:15px;
+      gap:16px;
     }
 
     .answer{
+      counter-increment:answer;
+      position:relative;
       width:100%;
-      min-height:68px;
-      padding:18px 20px;
-      border:2px solid var(--line);
-      border-bottom-color:var(--line-dark);
-      border-radius:15px;
-      background:#fff;
-      color:var(--ink);
+      min-height:76px;
+      padding:18px 52px 18px 64px;
+      border:2px solid var(--quiz-line);
+      border-bottom:5px solid #0a161a;
+      border-radius:16px;
+      background:var(--quiz-card);
+      color:var(--quiz-text);
       text-align:left;
       font-size:18px;
       font-weight:800;
@@ -136,19 +143,49 @@
       transition:border-color .14s ease,background .14s ease,transform .14s ease;
     }
 
+    .answer::before{
+      content:counter(answer);
+      position:absolute;
+      left:17px;
+      top:50%;
+      width:32px;
+      height:32px;
+      display:grid;
+      place-items:center;
+      transform:translateY(-50%);
+      border-radius:9px;
+      background:#263f47;
+      color:#fff;
+      font-size:14px;
+      font-weight:900;
+    }
+
+    .answer::after{
+      content:'›';
+      position:absolute;
+      right:18px;
+      top:50%;
+      transform:translateY(-52%);
+      color:#8ea4aa;
+      font-size:29px;
+      font-weight:700;
+    }
+
     .answer:hover,.answer:focus-visible{
-      border-color:var(--red);
-      background:#fff8f8;
+      border-color:#ff5d62;
+      background:var(--quiz-card-hover);
       outline:none;
       transform:translateY(-1px);
     }
+
+    .answer:hover::before,.answer:focus-visible::before{background:var(--red)}
 
     .checkpoint,
     .result-stage{
       display:none;
       flex:1;
       flex-direction:column;
-      padding-top:clamp(54px,10vh,100px);
+      padding-top:clamp(58px,10vh,104px);
       text-align:center;
     }
 
@@ -156,20 +193,21 @@
     .result-stage.show{display:flex}
 
     .check-icon{
-      width:72px;
-      height:72px;
+      width:78px;
+      height:78px;
       display:grid;
       place-items:center;
-      margin:0 auto 28px;
-      border-radius:50%;
-      background:#eaf7f0;
+      margin:0 auto 30px;
+      border-radius:22px;
+      background:rgba(88,204,2,.14);
+      border:2px solid rgba(88,204,2,.42);
       color:var(--green);
-      font-size:34px;
+      font-size:38px;
       font-weight:900;
     }
 
     .checkpoint-kicker{
-      margin:0 0 12px;
+      margin:0 0 13px;
       color:var(--green);
       font-size:13px;
       font-weight:900;
@@ -178,18 +216,19 @@
     }
 
     .checkpoint-title{
-      max-width:560px;
-      margin:0 auto 18px;
-      font-size:clamp(30px,7vw,45px);
+      max-width:570px;
+      margin:0 auto 19px;
+      color:var(--quiz-text);
+      font-size:clamp(31px,7vw,46px);
       line-height:1.08;
       letter-spacing:-.04em;
     }
 
     .checkpoint-copy{
-      max-width:540px;
+      max-width:550px;
       margin:0 auto;
-      color:var(--soft);
-      font-size:19px;
+      color:var(--quiz-soft);
+      font-size:20px;
       line-height:1.55;
     }
 
@@ -198,39 +237,38 @@
     .buy-btn{
       width:100%;
       border:0;
-      border-radius:14px;
-      background:linear-gradient(180deg,#ef2222,var(--red-dark));
+      border-radius:15px;
+      background:linear-gradient(180deg,#ff3c42,var(--red-dark));
       color:#fff;
-      padding:18px 20px;
+      padding:19px 20px;
       font-size:18px;
       font-weight:900;
       text-align:center;
       text-decoration:none;
       cursor:pointer;
-      box-shadow:0 6px 0 #850000;
+      box-shadow:0 6px 0 #760000;
       transition:filter .14s ease,transform .14s ease;
     }
 
     .continue-btn,
-    .result-btn{
-      margin-top:auto;
-    }
+    .result-btn{margin-top:auto}
 
     .continue-btn:hover,
     .result-btn:hover,
     .buy-btn:hover{
-      filter:brightness(1.05);
+      filter:brightness(1.06);
       transform:translateY(-1px);
     }
 
     .result-tag{
       display:inline-flex;
       align-self:center;
-      margin-bottom:18px;
-      padding:8px 12px;
+      margin-bottom:19px;
+      padding:9px 13px;
       border-radius:999px;
-      background:#fff0f0;
-      color:var(--red-dark);
+      background:rgba(227,27,35,.14);
+      border:1px solid rgba(255,77,77,.35);
+      color:#ff7478;
       font-size:12px;
       font-weight:900;
       letter-spacing:.08em;
@@ -238,29 +276,30 @@
     }
 
     .result-title{
-      max-width:590px;
-      margin:0 auto 18px;
-      font-size:clamp(31px,7vw,46px);
+      max-width:600px;
+      margin:0 auto 19px;
+      color:var(--quiz-text);
+      font-size:clamp(32px,7vw,47px);
       line-height:1.06;
       letter-spacing:-.04em;
     }
 
     .result-copy{
-      max-width:550px;
-      margin:0 auto 24px;
-      color:var(--soft);
-      font-size:18px;
+      max-width:560px;
+      margin:0 auto 25px;
+      color:var(--quiz-soft);
+      font-size:19px;
       line-height:1.55;
     }
 
     .result-insight{
-      max-width:560px;
+      max-width:570px;
       margin:0 auto;
-      padding:18px 20px;
+      padding:19px 20px;
       border-left:5px solid var(--red);
-      border-radius:10px;
-      background:var(--page);
-      color:var(--ink);
+      border-radius:11px;
+      background:var(--quiz-card);
+      color:var(--quiz-text);
       font-size:17px;
       font-weight:800;
       line-height:1.5;
@@ -318,7 +357,7 @@
       max-width:690px;
       margin:26px auto 0;
       padding:18px 19px;
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid var(--sales-line);
       border-left:5px solid #ff4d4d;
       border-radius:11px;
       background:#151820;
@@ -333,9 +372,9 @@
       max-width:760px;
       margin:30px auto 0;
       padding:clamp(22px,4vw,34px);
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid var(--sales-line);
       border-radius:18px;
-      background:#11141a;
+      background:var(--sales-card);
     }
 
     .mockup{
@@ -364,38 +403,40 @@
 
     .benefits{
       display:grid;
-      gap:13px;
-      max-width:620px;
-      margin:24px auto 0;
+      gap:14px;
+      max-width:630px;
+      margin:26px auto 0;
       padding:0;
       list-style:none;
     }
 
     .benefits li{
       position:relative;
-      padding:17px 17px 17px 50px;
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:12px;
-      background:#171b23;
+      padding:19px 18px 19px 54px;
+      border:1px solid var(--sales-line);
+      border-radius:13px;
+      background:var(--sales-card-2);
       text-align:left;
     }
 
     .benefits li::before{
       content:'✓';
       position:absolute;
-      left:17px;
-      top:16px;
+      left:18px;
+      top:18px;
       color:#61d394;
-      font-size:20px;
+      font-size:21px;
       font-weight:900;
     }
 
     .benefits strong{
       display:block;
-      margin-bottom:4px;
+      margin-bottom:6px;
       color:#fff;
-      font-size:18px;
-      line-height:1.2;
+      font-size:19px;
+      line-height:1.18;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
     }
 
     .benefits span{
@@ -405,9 +446,26 @@
       line-height:1.45;
     }
 
+    .benefits .personalized{
+      border-color:rgba(255,77,77,.42);
+      background:linear-gradient(180deg,rgba(222,0,1,.12),#171b23);
+    }
+
+    .benefits .personalized::before{color:#ff666a}
+
+    .benefits .personalized small{
+      display:block;
+      margin-bottom:7px;
+      color:#ff666a;
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+
     .offer{
       max-width:620px;
-      margin:28px auto 0;
+      margin:29px auto 0;
       text-align:center;
     }
 
@@ -453,30 +511,49 @@
 
     .hidden{display:none!important}
 
-    @media(max-width:480px){
-      .quiz-shell{padding:18px 18px calc(18px + env(safe-area-inset-bottom))}
+    @media(max-width:700px){
+      .quiz-shell{
+        width:100%;
+        max-width:none;
+        min-height:100dvh;
+        padding:20px 18px calc(20px + env(safe-area-inset-bottom));
+      }
+
+      .quiz-screen{padding-top:44px}
+      .question{font-size:35px;margin-bottom:30px}
+      .answers{gap:15px}
+      .answer{min-height:74px;padding:18px 50px 18px 62px;font-size:18px}
+      .checkpoint,.result-stage{padding-top:54px}
+      .checkpoint-copy,.result-copy{font-size:19px}
+      .continue-btn,.result-btn{font-size:19px;padding:20px}
+      .sales-wrap{padding-top:36px}
+      .product-block{padding:22px 16px}
+    }
+
+    @media(max-width:420px){
+      .quiz-shell{padding-left:16px;padding-right:16px}
       .quiz-screen{padding-top:34px}
-      .question{margin-bottom:24px;font-size:31px}
-      .answers{gap:12px}
-      .answer{min-height:62px;padding:16px 17px;font-size:17px}
-      .checkpoint,.result-stage{padding-top:44px}
+      .question{font-size:32px;margin-bottom:25px}
+      .answer{min-height:68px;padding:16px 46px 16px 58px;font-size:17px}
+      .answer::before{left:15px;width:30px;height:30px}
+      .answer::after{right:15px}
+      .checkpoint,.result-stage{padding-top:42px}
+      .checkpoint-title,.result-title{font-size:33px}
       .checkpoint-copy,.result-copy{font-size:17px}
       .result-insight{font-size:16px}
-      .sales-wrap{padding-top:36px}
-      .product-block{padding:21px 15px}
     }
 
     @media(max-height:700px) and (max-width:480px){
-      .quiz-shell{padding-top:14px}
+      .quiz-shell{padding-top:14px;padding-bottom:14px}
       .quiz-screen{padding-top:24px}
-      .question{font-size:28px;margin-bottom:18px}
-      .answers{gap:9px}
-      .answer{min-height:54px;padding:13px 15px;font-size:16px}
+      .question{font-size:29px;margin-bottom:18px}
+      .answers{gap:10px}
+      .answer{min-height:57px;padding-top:13px;padding-bottom:13px;font-size:16px}
       .checkpoint,.result-stage{padding-top:28px}
-      .check-icon{width:58px;height:58px;margin-bottom:18px;font-size:28px}
-      .checkpoint-title{font-size:30px}
+      .check-icon{width:62px;height:62px;margin-bottom:18px;font-size:30px}
+      .checkpoint-title,.result-title{font-size:30px}
       .checkpoint-copy,.result-copy{font-size:16px}
-      .continue-btn,.result-btn{padding:15px 18px;font-size:17px}
+      .continue-btn,.result-btn{padding:16px 18px;font-size:17px}
     }
   </style>
 </head>
@@ -532,9 +609,15 @@
         <p class="product-copy">Una guía corta con mensajes exactos para reactivar su curiosidad cuando responde corto, tarda demasiado o la conversación perdió toda la energía.</p>
 
         <ul class="benefits">
-          <li id="benefit1"></li>
-          <li id="benefit2"></li>
-          <li id="benefit3"></li>
+          <li>
+            <strong>Sabrás qué enviar en menos de 2 minutos.</strong>
+            <span>Abre la guía, identifica tu situación y adapta el mensaje.</span>
+          </li>
+          <li>
+            <strong>Deja de matar el chat con otro “¿qué haces?”.</strong>
+            <span>Usa un movimiento que cambie la energía sin perseguirla.</span>
+          </li>
+          <li class="personalized" id="personalizedBenefit"></li>
         </ul>
 
         <div class="offer">
@@ -596,7 +679,7 @@
         insight:'Tu mejor movimiento no es otra pregunta. Es un mensaje que cambie la energía y le dé una razón para participar.',
         salesTitle:'Deja de cargar tú solo con <span>toda la conversación</span>.',
         salesSub:'Necesitas un mensaje que rompa el patrón de “jaja”, “sí” y “bien” sin parecer molesto ni necesitado.',
-        benefit:{title:'Rompe el patrón de “jaja”.',copy:'Usa un mensaje que invite a participar sin perseguirla.'}
+        benefitTitle:'Rompe el ciclo de “jaja”, “sí” y “bien”.'
       },
       delay:{
         result:'La demora está controlando tu manera de escribir.',
@@ -604,7 +687,7 @@
         insight:'Tu mejor movimiento es saber cuándo entrar, qué decir y cuándo volver a dejar espacio.',
         salesTitle:'No conviertas cada demora en <span>una crisis de WhatsApp</span>.',
         salesSub:'Necesitas mensajes que funcionen sin perseguirla y reglas claras para saber cuándo esperar.',
-        benefit:{title:'Escribe sin perseguir.',copy:'Ten un movimiento claro aunque tarde horas en responder.'}
+        benefitTitle:'No dejes que su demora te haga escribir de más.'
       },
       seen:{
         result:'Necesitas volver a entrar sin reclamar.',
@@ -612,7 +695,7 @@
         insight:'Tu mejor movimiento es una reentrada limpia que no pida explicaciones y mida si todavía hay interés.',
         salesTitle:'Vuelve a entrar sin convertir el “visto” en <span>un interrogatorio</span>.',
         salesSub:'Necesitas un mensaje breve que abra una nueva puerta sin rogar atención.',
-        benefit:{title:'Vuelve a entrar sin reclamar.',copy:'Abre una nueva conversación sin pedir explicaciones.'}
+        benefitTitle:'Vuelve a entrar sin reclamar el visto.'
       },
       dead:{
         result:'La conversación perdió energía.',
@@ -620,22 +703,15 @@
         insight:'Tu mejor movimiento es cambiar la energía con un mensaje distinto, no seguir excavando el mismo tema.',
         salesTitle:'Haz que la conversación vuelva a <span>tener vida</span>.',
         salesSub:'Necesitas un mensaje que cambie el ritmo antes de que la charla muera del todo.',
-        benefit:{title:'Cambia la energía del chat.',copy:'Deja de exprimir el tema que ya murió.'}
+        benefitTitle:'Cambia la energía antes de que muera del todo.'
       }
     };
 
-    const behaviorBenefits={
-      interview:{title:'Deja de entrevistarla.',copy:'Cambia preguntas vacías por mensajes con dirección.'},
-      overthink:{title:'Corta el sobreanálisis.',copy:'Sabe cuándo enviar y cuándo dejar el teléfono quieto.'},
-      chase:{title:'Evita el mensaje de más.',copy:'Envía uno con intención y no lo entierres con otros tres.'},
-      freeze:{title:'Deja de quedarte paralizado.',copy:'Reconoce cuándo sí vale la pena hacer un movimiento.'}
-    };
-
-    const needBenefits={
-      scripts:{title:'Abre, adapta y envía.',copy:'Recibe ejemplos claros para tu situación exacta.'},
-      timing:{title:'Domina el momento.',copy:'Aprende cuándo escribir y cuándo no tocar nada.'},
-      next:{title:'Sabe qué hacer después.',copy:'Ten un plan para una respuesta cálida, fría o ninguna.'},
-      simple:{title:'Úsalo en minutos.',copy:'Sin teoría larga. Elige tu situación y aplica.'}
+    const behaviorCopy={
+      interview:'Deja de convertir cada respuesta en otra pregunta. Usa un mensaje con dirección.',
+      overthink:'Sabrás cuándo escribir y cuándo dejar el teléfono quieto.',
+      chase:'Envía un mensaje con intención y evita enterrarlo con otros tres.',
+      freeze:'Reconoce cuándo sí vale la pena actuar sin parecer necesitado.'
     };
 
     let current=0;
@@ -702,10 +778,6 @@
       return notes[data.behavior]||'';
     }
 
-    function setBenefit(id,item){
-      document.getElementById(id).innerHTML=`<strong>${item.title}</strong><span>${item.copy}</span>`;
-    }
-
     function showResult(){
       const p=profiles[data.type]||profiles.dead;
       document.getElementById('resultTitle').textContent=p.result;
@@ -716,10 +788,7 @@
       document.getElementById('salesTitle').innerHTML=p.salesTitle;
       document.getElementById('salesSub').textContent=p.salesSub;
       document.getElementById('personalNote').textContent=behaviorNote();
-
-      setBenefit('benefit1',p.benefit);
-      setBenefit('benefit2',behaviorBenefits[data.behavior]||behaviorBenefits.overthink);
-      setBenefit('benefit3',needBenefits[data.need]||needBenefits.simple);
+      document.getElementById('personalizedBenefit').innerHTML=`<small>Basado en tus respuestas</small><strong>${p.benefitTitle}</strong><span>${behaviorCopy[data.behavior]||'Recibe el movimiento adecuado para tu situación y evita empeorarla.'}</span>`;
     }
 
     document.getElementById('showPlanBtn').addEventListener('click',()=>{
