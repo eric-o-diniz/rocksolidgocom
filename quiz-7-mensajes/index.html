@@ -3,32 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#102126">
+  <meta name="theme-color" content="#fbfbfc">
   <title>Diagnóstico de Chat Frío | 7 Mensajes</title>
-  <meta name="description" content="Responde 4 preguntas y descubre qué tipo de mensaje necesitas para reactivar una conversación fría.">
+  <meta name="description" content="Responde 6 preguntas y descubre qué mensaje necesitas para reactivar una conversación fría.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --quiz-bg:#102126;
-      --quiz-card:#193038;
-      --quiz-card-hover:#213d46;
-      --quiz-line:#3c5660;
-      --quiz-text:#f6f8f8;
-      --quiz-soft:#bbc8cc;
-      --red:#e31b23;
+      --paper:#fbfbfc;
+      --white:#ffffff;
+      --ink:#17191e;
+      --soft:#626b78;
+      --muted:#939ba6;
+      --line:#e1e5ea;
+      --line-strong:#cbd1d8;
+      --answer:#f2f5f7;
+      --answer-hover:#eaf0f3;
+      --red:#df171d;
       --red-dark:#a90000;
-      --green:#58cc02;
-      --black:#090a0d;
-      --ink:#16181d;
-      --soft:#68707d;
-      --paper:#ffffff;
-      --paper-alt:#f6f7f9;
-      --line:#e2e5ea;
+      --red-soft:#fff0f1;
+      --green:#37a866;
+      --dark:#10151b;
+      --dark-soft:#1a222c;
+      --sales-bg:#ffffff;
+      --sales-alt:#f6f7f9;
       --max:680px;
-      --sales-max:1080px;
+      --sales-max:1040px;
     }
 
     *{box-sizing:border-box}
@@ -36,8 +38,8 @@
 
     body{
       margin:0;
-      background:var(--quiz-bg);
-      color:var(--quiz-text);
+      background:var(--paper);
+      color:var(--ink);
       font-family:Inter,Arial,sans-serif;
       line-height:1.4;
       -webkit-font-smoothing:antialiased;
@@ -50,10 +52,9 @@
 
     .quiz-view{
       min-height:100svh;
-      width:100%;
       display:flex;
       justify-content:center;
-      background:var(--quiz-bg);
+      background:var(--paper);
     }
 
     .quiz-shell{
@@ -61,187 +62,195 @@
       min-height:100svh;
       display:flex;
       flex-direction:column;
-      padding:22px 24px calc(22px + env(safe-area-inset-bottom));
+      padding:18px 24px calc(22px + env(safe-area-inset-bottom));
     }
 
-    .quiz-top{flex:0 0 auto}
-
-    .quiz-meta{
-      display:flex;
+    .quiz-top{
+      display:grid;
+      grid-template-columns:74px 1fr 54px;
+      gap:12px;
       align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:13px;
+      flex:0 0 auto;
     }
 
-    .quiz-label{
-      margin:0;
-      color:var(--quiz-soft);
-      font-size:13px;
+    .back-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      width:max-content;
+      padding:8px 0;
+      border:0;
+      background:transparent;
+      color:var(--soft);
+      font-size:14px;
       font-weight:900;
+      cursor:pointer;
+      visibility:hidden;
     }
 
-    .progress-count{
-      color:var(--quiz-soft);
-      font-size:13px;
-      font-weight:900;
-      white-space:nowrap;
-    }
+    .back-btn.visible{visibility:visible}
+    .back-btn:hover{color:var(--ink)}
 
     .progress-track{
-      height:10px;
+      height:9px;
       overflow:hidden;
       border-radius:999px;
-      background:#31474f;
+      background:#e6eaee;
     }
 
     .progress-bar{
-      width:25%;
+      width:16.66%;
       height:100%;
       border-radius:inherit;
-      background:linear-gradient(90deg,#ff4248,var(--red));
-      box-shadow:0 0 16px rgba(227,27,35,.34);
-      transition:width .22s ease;
+      background:linear-gradient(90deg,#ff444a,var(--red));
+      transition:width .28s ease;
+    }
+
+    .progress-count{
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      text-align:right;
+      white-space:nowrap;
     }
 
     .quiz-screen{
       flex:1;
       display:flex;
       flex-direction:column;
-      padding-top:clamp(48px,8vh,84px);
+      padding-top:clamp(48px,8vh,88px);
     }
 
     .question{
       max-width:620px;
       margin:0 0 34px;
-      color:var(--quiz-text);
-      font-size:clamp(33px,7.2vw,47px);
-      line-height:1.08;
-      letter-spacing:-.04em;
+      font-size:clamp(34px,7.3vw,48px);
+      line-height:1.07;
+      letter-spacing:-.045em;
     }
 
     .answers{
-      counter-reset:answer;
       display:grid;
-      gap:16px;
+      gap:15px;
     }
 
     .answer{
-      counter-increment:answer;
       position:relative;
       width:100%;
-      min-height:76px;
-      padding:18px 52px 18px 64px;
-      border:2px solid var(--quiz-line);
-      border-bottom:5px solid #0a161a;
+      min-height:72px;
+      padding:18px 54px 18px 20px;
+      border:2px solid var(--line);
+      border-bottom:5px solid var(--line-strong);
       border-radius:16px;
-      background:var(--quiz-card);
-      color:var(--quiz-text);
+      background:var(--white);
+      color:var(--ink);
       text-align:left;
       font-size:18px;
       font-weight:800;
       line-height:1.28;
       cursor:pointer;
-      transition:border-color .14s ease,background .14s ease,transform .14s ease;
-    }
-
-    .answer::before{
-      content:counter(answer);
-      position:absolute;
-      left:17px;
-      top:50%;
-      width:32px;
-      height:32px;
-      display:grid;
-      place-items:center;
-      transform:translateY(-50%);
-      border-radius:9px;
-      background:#263f47;
-      color:#fff;
-      font-size:14px;
-      font-weight:900;
+      transition:background .16s ease,border-color .16s ease,color .16s ease,transform .16s ease;
     }
 
     .answer::after{
       content:'›';
       position:absolute;
-      right:18px;
+      right:19px;
       top:50%;
-      transform:translateY(-52%);
-      color:#8ea4aa;
+      transform:translateY(-54%);
+      color:#9ca5af;
       font-size:29px;
       font-weight:700;
     }
 
     .answer:hover,.answer:focus-visible{
-      border-color:#ff5d62;
-      background:var(--quiz-card-hover);
+      background:var(--answer-hover);
+      border-color:#bac4ce;
       outline:none;
       transform:translateY(-1px);
     }
 
-    .answer:hover::before,.answer:focus-visible::before{background:var(--red)}
+    .answer.selected{
+      background:var(--red-soft);
+      border-color:var(--red);
+      border-bottom-color:var(--red-dark);
+      color:var(--red-dark);
+      transform:scale(.985);
+    }
 
-    .checkpoint,
+    .answer.selected::after{
+      content:'✓';
+      color:var(--red);
+      font-size:22px;
+      font-weight:900;
+    }
+
+    .pattern-break,
     .result-stage{
       display:none;
       flex:1;
       flex-direction:column;
-      padding-top:clamp(58px,10vh,104px);
+      justify-content:center;
+      padding:42px 0 10px;
+    }
+
+    .pattern-break.show,
+    .result-stage.show{display:flex}
+
+    .pattern-card{
+      padding:clamp(30px,7vw,48px);
+      border-radius:28px;
+      background:linear-gradient(150deg,var(--dark),var(--dark-soft));
+      color:#fff;
+      box-shadow:0 25px 60px rgba(16,21,27,.22);
       text-align:center;
     }
 
-    .checkpoint.show,
-    .result-stage.show{display:flex}
-
-    .check-icon{
-      width:78px;
-      height:78px;
+    .pattern-icon{
+      width:68px;
+      height:68px;
       display:grid;
       place-items:center;
-      margin:0 auto 30px;
-      border-radius:22px;
-      background:rgba(88,204,2,.14);
-      border:2px solid rgba(88,204,2,.42);
-      color:var(--green);
-      font-size:38px;
+      margin:0 auto 25px;
+      border-radius:20px;
+      background:rgba(223,23,29,.15);
+      border:1px solid rgba(255,90,95,.35);
+      color:#ff6267;
+      font-size:31px;
       font-weight:900;
     }
 
-    .checkpoint-kicker{
-      margin:0 0 13px;
-      color:var(--green);
-      font-size:13px;
+    .pattern-kicker{
+      margin:0 0 12px;
+      color:#ff7075;
+      font-size:12px;
       font-weight:900;
-      letter-spacing:.08em;
+      letter-spacing:.10em;
       text-transform:uppercase;
     }
 
-    .checkpoint-title{
-      max-width:570px;
-      margin:0 auto 19px;
-      color:var(--quiz-text);
-      font-size:clamp(31px,7vw,46px);
-      line-height:1.08;
+    .pattern-title{
+      margin:0 0 16px;
+      font-size:clamp(31px,7vw,45px);
+      line-height:1.07;
       letter-spacing:-.04em;
     }
 
-    .checkpoint-copy{
-      max-width:550px;
-      margin:0 auto;
-      color:var(--quiz-soft);
-      font-size:20px;
+    .pattern-copy{
+      margin:0;
+      color:#c1c9d1;
+      font-size:clamp(17px,4vw,20px);
       line-height:1.55;
     }
 
     .continue-btn,
     .result-btn,
-    .buy-btn,
-    .hero-cta{
+    .hero-cta,
+    .buy-btn{
       width:100%;
       border:0;
       border-radius:15px;
-      background:linear-gradient(180deg,#ff3c42,var(--red-dark));
+      background:linear-gradient(180deg,#f23b41,var(--red-dark));
       color:#fff;
       padding:19px 20px;
       font-size:18px;
@@ -249,30 +258,35 @@
       text-align:center;
       text-decoration:none;
       cursor:pointer;
-      box-shadow:0 6px 0 #760000;
+      box-shadow:0 6px 0 #790000;
       transition:filter .14s ease,transform .14s ease;
     }
 
-    .continue-btn,
+    .continue-btn{margin-top:26px}
     .result-btn{margin-top:auto}
 
     .continue-btn:hover,
     .result-btn:hover,
-    .buy-btn:hover,
-    .hero-cta:hover{
+    .hero-cta:hover,
+    .buy-btn:hover{
       filter:brightness(1.06);
       transform:translateY(-1px);
+    }
+
+    .result-stage{
+      text-align:center;
+      justify-content:flex-start;
+      padding-top:clamp(52px,9vh,96px);
     }
 
     .result-tag{
       display:inline-flex;
       align-self:center;
-      margin-bottom:19px;
-      padding:9px 13px;
+      margin-bottom:18px;
+      padding:8px 12px;
       border-radius:999px;
-      background:rgba(227,27,35,.14);
-      border:1px solid rgba(255,77,77,.35);
-      color:#ff7478;
+      background:var(--red-soft);
+      color:var(--red-dark);
       font-size:12px;
       font-weight:900;
       letter-spacing:.08em;
@@ -280,54 +294,54 @@
     }
 
     .result-title{
-      max-width:600px;
-      margin:0 auto 19px;
-      color:var(--quiz-text);
-      font-size:clamp(32px,7vw,47px);
-      line-height:1.06;
-      letter-spacing:-.04em;
+      max-width:610px;
+      margin:0 auto 18px;
+      font-size:clamp(34px,7.2vw,49px);
+      line-height:1.05;
+      letter-spacing:-.045em;
     }
 
     .result-copy{
       max-width:560px;
-      margin:0 auto 25px;
-      color:var(--quiz-soft);
+      margin:0 auto 24px;
+      color:var(--soft);
       font-size:19px;
       line-height:1.55;
     }
 
     .result-insight{
       max-width:570px;
-      margin:0 auto;
+      margin:0 auto 26px;
       padding:19px 20px;
       border-left:5px solid var(--red);
       border-radius:11px;
-      background:var(--quiz-card);
-      color:var(--quiz-text);
+      background:var(--white);
+      color:var(--ink);
       font-size:17px;
       font-weight:800;
       line-height:1.5;
       text-align:left;
+      box-shadow:0 12px 32px rgba(17,25,30,.08);
     }
 
     .sales-page{
       display:none;
       min-height:100vh;
-      background:var(--paper);
-      color:var(--ink);
       overflow:hidden;
+      background:var(--sales-bg);
+      color:var(--ink);
     }
 
     .sales-page.show{display:block}
 
     .sales-section{
-      min-height:72svh;
+      min-height:74svh;
       display:grid;
       place-items:center;
-      padding:clamp(80px,11vw,145px) 22px;
+      padding:clamp(86px,11vw,145px) 22px;
     }
 
-    .sales-section:nth-child(even){background:var(--paper-alt)}
+    .sales-section:nth-child(even){background:var(--sales-alt)}
 
     .sales-inner{
       width:min(100%,var(--sales-max));
@@ -335,19 +349,17 @@
     }
 
     .sales-hero{
-      min-height:92svh;
-      background:var(--black);
-      color:#f4f1ec;
+      min-height:94svh;
+      background:var(--dark);
+      color:#f5f3ef;
       text-align:center;
     }
 
-    .sales-hero .sales-inner{
-      max-width:800px;
-    }
+    .sales-hero .sales-inner{max-width:810px}
 
     .sales-eyebrow{
       margin:0 0 14px;
-      color:#ff5b5b;
+      color:#ff666a;
       font-size:12px;
       font-weight:900;
       letter-spacing:.10em;
@@ -356,28 +368,28 @@
 
     .sales-title{
       margin:0 0 20px;
-      font-size:clamp(40px,7vw,72px);
+      font-size:clamp(42px,7vw,73px);
       line-height:1.01;
-      letter-spacing:-.045em;
+      letter-spacing:-.047em;
     }
 
-    .sales-title span{color:#ff4d4d}
+    .sales-title span{color:#ff5257}
 
     .sales-sub{
       max-width:700px;
       margin:0 auto;
-      color:#b8bdc7;
+      color:#bcc4cb;
       font-size:clamp(18px,2.5vw,22px);
       line-height:1.55;
     }
 
     .personal-note{
-      max-width:700px;
-      margin:32px auto 0;
+      max-width:710px;
+      margin:31px auto 0;
       padding:20px 22px;
-      border-left:5px solid #ff4d4d;
+      border-left:5px solid #ff5257;
       border-radius:10px;
-      background:#151820;
+      background:#19212a;
       color:#fff;
       font-size:17px;
       font-weight:750;
@@ -387,26 +399,25 @@
 
     .hero-cta{
       display:block;
-      max-width:390px;
-      margin:32px auto 0;
+      max-width:430px;
+      margin:33px auto 0;
     }
 
-    .product-layout,
-    .benefit-row{
+    .product-layout{
       display:grid;
       grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-      gap:clamp(42px,8vw,100px);
+      gap:clamp(46px,8vw,100px);
       align-items:center;
+      max-width:1000px;
+      margin:0 auto;
     }
-
-    .product-layout{max-width:1000px;margin:0 auto}
 
     .mockup{
       width:100%;
       max-width:620px;
       margin:0 auto;
       object-fit:contain;
-      filter:drop-shadow(0 25px 28px rgba(0,0,0,.16));
+      filter:drop-shadow(0 26px 28px rgba(0,0,0,.15));
       animation:floatMockup 5.5s ease-in-out infinite;
     }
 
@@ -426,10 +437,9 @@
 
     .section-title{
       margin:0 0 18px;
-      color:var(--ink);
-      font-size:clamp(36px,5.5vw,58px);
+      font-size:clamp(37px,5.5vw,59px);
       line-height:1.04;
-      letter-spacing:-.04em;
+      letter-spacing:-.042em;
     }
 
     .section-copy{
@@ -440,90 +450,128 @@
       line-height:1.62;
     }
 
-    .benefits-area{
-      background:var(--paper);
-      padding-top:clamp(95px,12vw,160px);
-      padding-bottom:clamp(95px,12vw,160px);
+    .timeline-section{
+      background:var(--white)!important;
+      padding-top:clamp(95px,12vw,155px);
+      padding-bottom:clamp(95px,12vw,155px);
     }
 
-    .benefit-stack{
-      display:grid;
-      gap:clamp(95px,14vw,170px);
-      max-width:980px;
+    .timeline-heading{
+      max-width:720px;
+      margin:0 auto 72px;
+      text-align:center;
+    }
+
+    .timeline-heading h3{
+      margin:0;
+      font-size:clamp(38px,6vw,62px);
+      line-height:1.03;
+      letter-spacing:-.045em;
+    }
+
+    .timeline{
+      --fill:0%;
+      position:relative;
+      max-width:760px;
       margin:0 auto;
     }
 
-    .benefit-row:nth-child(even) .benefit-symbol{order:2}
-    .benefit-row:nth-child(even) .benefit-copy{order:1}
+    .timeline::before,
+    .timeline-fill{
+      content:'';
+      position:absolute;
+      top:30px;
+      left:29px;
+      width:6px;
+      height:calc(100% - 60px);
+      border-radius:999px;
+    }
 
-    .benefit-symbol{
-      width:min(100%,340px);
-      aspect-ratio:1/1;
+    .timeline::before{background:#e4e7eb}
+
+    .timeline-fill{
+      z-index:1;
+      height:var(--fill);
+      max-height:calc(100% - 60px);
+      background:linear-gradient(180deg,#ff4b50,var(--red));
+      transition:height .12s linear;
+    }
+
+    .timeline-item{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:66px 1fr;
+      gap:24px;
+      align-items:start;
+      min-height:190px;
+      padding-bottom:48px;
+    }
+
+    .timeline-item:last-child{
+      min-height:60px;
+      padding-bottom:0;
+    }
+
+    .timeline-circle{
+      width:60px;
+      height:60px;
       display:grid;
       place-items:center;
-      margin:0 auto;
-      border-radius:42px;
-      background:linear-gradient(145deg,#fff3f3,#ffe2e2);
-      color:var(--red);
-      font-size:clamp(74px,11vw,128px);
+      border:5px solid #e4e7eb;
+      border-radius:50%;
+      background:#fff;
+      color:#9ba3ad;
+      font-size:19px;
       font-weight:900;
-      box-shadow:0 24px 55px rgba(227,27,35,.12);
+      transition:border-color .25s ease,background .25s ease,color .25s ease,transform .25s ease;
     }
 
-    .benefit-number{
-      display:block;
-      margin-bottom:12px;
-      color:var(--red);
-      font-size:13px;
+    .timeline-item.active .timeline-circle{
+      border-color:var(--red);
+      background:var(--red);
+      color:#fff;
+      transform:scale(1.06);
+    }
+
+    .timeline-benefit{
+      margin:8px 0 0;
+      font-size:clamp(27px,4.5vw,43px);
       font-weight:900;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-    }
-
-    .benefit-title{
-      margin:0 0 17px;
-      font-size:clamp(34px,5vw,54px);
-      line-height:1.04;
-      letter-spacing:-.04em;
-    }
-
-    .benefit-text{
-      margin:0;
-      color:var(--soft);
-      font-size:clamp(18px,2vw,21px);
-      line-height:1.6;
+      line-height:1.08;
+      letter-spacing:-.035em;
     }
 
     .offer-section{
-      min-height:86svh;
-      background:var(--black)!important;
+      min-height:88svh;
+      background:var(--dark)!important;
       color:#fff;
       text-align:center;
     }
 
     .offer-inner{
-      width:min(100%,720px);
+      width:min(100%,730px);
       margin:0 auto;
     }
 
     .offer-title{
       margin:0 0 18px;
-      font-size:clamp(40px,7vw,70px);
-      line-height:1.02;
-      letter-spacing:-.045em;
+      font-size:clamp(42px,7vw,72px);
+      line-height:1.01;
+      letter-spacing:-.047em;
     }
 
     .offer-copy{
       max-width:620px;
       margin:0 auto;
-      color:#b9bec8;
+      color:#bbc3cb;
       font-size:clamp(18px,2.5vw,21px);
       line-height:1.55;
     }
 
     .price-label{
       margin:34px 0 0;
-      color:#8f96a3;
+      color:#9099a3;
       font-size:12px;
       font-weight:800;
       letter-spacing:.08em;
@@ -531,8 +579,8 @@
     }
 
     .price{
-      margin:8px 0 22px;
-      font-size:78px;
+      margin:8px 0 23px;
+      font-size:80px;
       font-weight:900;
       line-height:1;
     }
@@ -546,20 +594,20 @@
 
     .buy-btn{
       display:block;
-      max-width:480px;
+      max-width:520px;
       margin:0 auto;
     }
 
     .offer-note{
       margin:16px 0 0;
-      color:#858c98;
+      color:#858e98;
       font-size:12px;
     }
 
     .legal{
       max-width:700px;
       margin:34px auto 0;
-      color:#6e7480;
+      color:#6f7781;
       font-size:11px;
       line-height:1.5;
       text-align:center;
@@ -567,12 +615,12 @@
 
     .reveal{
       opacity:0;
-      transform:translateY(42px);
-      transition:opacity .75s ease,transform .75s ease;
+      transform:translateY(38px);
+      transition:opacity .72s ease,transform .72s ease;
     }
 
-    .reveal.from-left{transform:translateX(-48px)}
-    .reveal.from-right{transform:translateX(48px)}
+    .reveal.from-left{transform:translateX(-44px)}
+    .reveal.from-right{transform:translateX(44px)}
 
     .reveal.visible{
       opacity:1;
@@ -586,90 +634,88 @@
         width:100%;
         max-width:none;
         min-height:100dvh;
-        padding:20px 18px calc(20px + env(safe-area-inset-bottom));
+        padding:16px 17px calc(18px + env(safe-area-inset-bottom));
       }
 
-      .quiz-screen{padding-top:44px}
-      .question{font-size:35px;margin-bottom:30px}
-      .answers{gap:15px}
-      .answer{min-height:74px;padding:18px 50px 18px 62px;font-size:18px}
-      .checkpoint,.result-stage{padding-top:54px}
-      .checkpoint-copy,.result-copy{font-size:19px}
-      .continue-btn,.result-btn{font-size:19px;padding:20px}
+      .quiz-top{grid-template-columns:70px 1fr 48px}
+      .quiz-screen{padding-top:42px}
+      .question{font-size:35px;margin-bottom:29px}
+      .answers{gap:14px}
+      .answer{min-height:70px;padding:17px 50px 17px 18px;font-size:18px}
+      .pattern-break{padding-top:28px;padding-bottom:0}
+      .pattern-card{min-height:72svh;display:flex;flex-direction:column;justify-content:center}
+      .continue-btn{margin-top:28px}
+      .result-stage{padding-top:48px}
 
       .sales-section{
         min-height:auto;
-        padding:92px 22px;
+        padding:94px 20px;
       }
 
       .sales-hero{
         min-height:100svh;
-        padding-top:90px;
-        padding-bottom:90px;
+        padding-top:92px;
+        padding-bottom:92px;
       }
 
-      .product-layout,
-      .benefit-row{
+      .product-layout{
         grid-template-columns:1fr;
-        gap:42px;
+        gap:44px;
         text-align:center;
       }
 
-      .product-layout .product-copy-block{order:2}
-      .product-layout .mockup-wrap{order:1}
+      .product-copy-block{order:2}
+      .mockup-wrap{order:1}
+      .section-copy{margin-left:auto;margin-right:auto}
 
-      .section-copy,
-      .benefit-text{margin-left:auto;margin-right:auto}
-
-      .benefit-row:nth-child(even) .benefit-symbol,
-      .benefit-row:nth-child(even) .benefit-copy{
-        order:initial;
-      }
-
-      .benefit-symbol{
-        width:min(78vw,300px);
-        border-radius:34px;
-      }
-
-      .benefit-stack{gap:110px}
-      .benefit-title{font-size:39px}
-      .offer-section{min-height:92svh}
-      .price{font-size:72px}
+      .timeline-heading{margin-bottom:60px}
+      .timeline-item{grid-template-columns:60px 1fr;gap:18px;min-height:180px}
+      .timeline::before,.timeline-fill{left:27px}
+      .timeline-circle{width:58px;height:58px}
+      .timeline-benefit{font-size:31px;margin-top:7px}
+      .offer-section{min-height:94svh}
     }
 
     @media(max-width:420px){
-      .quiz-shell{padding-left:16px;padding-right:16px}
+      .quiz-top{grid-template-columns:64px 1fr 45px;gap:9px}
+      .back-btn{font-size:13px}
       .quiz-screen{padding-top:34px}
-      .question{font-size:32px;margin-bottom:25px}
-      .answer{min-height:68px;padding:16px 46px 16px 58px;font-size:17px}
-      .answer::before{left:15px;width:30px;height:30px}
-      .answer::after{right:15px}
-      .checkpoint,.result-stage{padding-top:42px}
-      .checkpoint-title,.result-title{font-size:33px}
-      .checkpoint-copy,.result-copy{font-size:17px}
-      .result-insight{font-size:16px}
+      .question{font-size:32px;margin-bottom:24px}
+      .answer{min-height:65px;padding:15px 47px 15px 16px;font-size:17px}
+      .pattern-card{padding:28px 22px;border-radius:24px}
+      .pattern-title{font-size:33px}
+      .pattern-copy{font-size:17px}
+      .result-title{font-size:34px}
+      .result-copy{font-size:17px}
 
-      .sales-section{padding:78px 18px}
-      .sales-title{font-size:42px}
+      .sales-section{padding:80px 18px}
+      .sales-title{font-size:43px}
       .section-title{font-size:39px}
-      .section-copy,.benefit-text{font-size:18px}
-      .benefit-stack{gap:96px}
-      .benefit-symbol{width:min(82vw,280px)}
-      .benefit-title{font-size:36px}
-      .offer-title{font-size:43px}
+      .section-copy{font-size:18px}
+      .timeline-heading h3{font-size:41px}
+      .timeline-item{grid-template-columns:56px 1fr;gap:15px;min-height:175px}
+      .timeline::before,.timeline-fill{left:25px;width:5px}
+      .timeline-circle{width:55px;height:55px;font-size:18px}
+      .timeline-benefit{font-size:27px}
+      .offer-title{font-size:44px}
+      .buy-btn{font-size:17px}
     }
 
     @media(max-height:700px) and (max-width:480px){
-      .quiz-shell{padding-top:14px;padding-bottom:14px}
-      .quiz-screen{padding-top:24px}
-      .question{font-size:29px;margin-bottom:18px}
-      .answers{gap:10px}
-      .answer{min-height:57px;padding-top:13px;padding-bottom:13px;font-size:16px}
-      .checkpoint,.result-stage{padding-top:28px}
-      .check-icon{width:62px;height:62px;margin-bottom:18px;font-size:30px}
-      .checkpoint-title,.result-title{font-size:30px}
-      .checkpoint-copy,.result-copy{font-size:16px}
-      .continue-btn,.result-btn{padding:16px 18px;font-size:17px}
+      .quiz-shell{padding-top:12px;padding-bottom:12px}
+      .quiz-screen{padding-top:22px}
+      .question{font-size:29px;margin-bottom:17px}
+      .answers{gap:9px}
+      .answer{min-height:56px;padding-top:12px;padding-bottom:12px;font-size:16px}
+      .pattern-card{min-height:auto;padding:25px 20px}
+      .pattern-icon{width:56px;height:56px;margin-bottom:16px}
+      .pattern-title{font-size:29px}
+      .pattern-copy{font-size:16px}
+      .continue-btn{padding:15px 18px;font-size:17px;margin-top:20px}
+      .result-stage{padding-top:27px}
+      .result-title{font-size:30px}
+      .result-copy{font-size:16px}
+      .result-btn{padding:15px 18px;font-size:17px}
     }
 
     @media(prefers-reduced-motion:reduce){
@@ -683,13 +729,9 @@
   <main class="quiz-view" id="quizView">
     <div class="quiz-shell">
       <div class="quiz-top">
-        <div class="quiz-meta">
-          <p class="quiz-label">Diagnóstico de chat</p>
-          <span class="progress-count" id="progressCount">1 de 4</span>
-        </div>
-        <div class="progress-track" aria-hidden="true">
-          <div class="progress-bar" id="progressBar"></div>
-        </div>
+        <button class="back-btn" id="backBtn" type="button" aria-label="Volver a la pregunta anterior">← Atrás</button>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+        <span class="progress-count" id="progressCount">1/6</span>
       </div>
 
       <section class="quiz-screen" id="questionStage" aria-live="polite">
@@ -697,12 +739,14 @@
         <div class="answers" id="answers"></div>
       </section>
 
-      <section class="checkpoint" id="checkpointStage">
-        <div class="check-icon">✓</div>
-        <p class="checkpoint-kicker">Bien. Esto aclara algo.</p>
-        <h2 class="checkpoint-title" id="checkpointTitle"></h2>
-        <p class="checkpoint-copy" id="checkpointCopy"></p>
-        <button class="continue-btn" id="continueBtn" type="button">Continuar</button>
+      <section class="pattern-break" id="breakStage">
+        <div class="pattern-card">
+          <div class="pattern-icon" id="breakIcon">!</div>
+          <p class="pattern-kicker" id="breakKicker">Esto importa</p>
+          <h2 class="pattern-title" id="breakTitle"></h2>
+          <p class="pattern-copy" id="breakCopy"></p>
+          <button class="continue-btn" id="continueBtn" type="button">Seguir</button>
+        </div>
       </section>
 
       <section class="result-stage" id="resultStage">
@@ -718,11 +762,11 @@
   <section class="sales-page" id="salesPage">
     <section class="sales-section sales-hero">
       <div class="sales-inner reveal">
-        <p class="sales-eyebrow">Recomendación basada en tus respuestas</p>
+        <p class="sales-eyebrow">Basado en lo que acabas de responder</p>
         <h2 class="sales-title" id="salesTitle"></h2>
         <p class="sales-sub" id="salesSub"></p>
         <div class="personal-note" id="personalNote"></div>
-        <a class="hero-cta" href="#product">Ver la solución recomendada</a>
+        <a class="hero-cta" href="#product">Ver el mensaje que necesitas</a>
       </div>
     </section>
 
@@ -733,52 +777,49 @@
         </div>
 
         <div class="product-copy-block reveal from-right">
-          <p class="section-kicker">Una guía corta. Un problema claro.</p>
-          <h3 class="section-title">7 mensajes para saber qué enviar cuando el chat se apaga.</h3>
-          <p class="section-copy">Abres la guía, eliges la situación que se parece a la tuya y adaptas el mensaje. Sin teoría eterna. Sin inventar sobre la marcha.</p>
+          <p class="section-kicker">Una guía corta para una situación concreta</p>
+          <h3 class="section-title">Abre la guía. Elige tu caso. Envía algo con dirección.</h3>
+          <p class="section-copy">7 mensajes para cuando responde corto, tarda, te deja en visto o la charla simplemente murió.</p>
         </div>
       </div>
     </section>
 
-    <section class="sales-section benefits-area">
-      <div class="sales-inner benefit-stack">
-        <article class="benefit-row">
-          <div class="benefit-symbol reveal from-left">01</div>
-          <div class="benefit-copy reveal from-right">
-            <span class="benefit-number">Lo que cambia</span>
-            <h3 class="benefit-title">Consigue una respuesta que te dé algo real para seguir.</h3>
-            <p class="benefit-text">Aprende a reabrir con una observación que despierta curiosidad, en vez de otra pregunta que termina en “jaja”.</p>
-          </div>
-        </article>
+    <section class="sales-section timeline-section">
+      <div class="sales-inner">
+        <div class="timeline-heading reveal">
+          <p class="section-kicker">Lo que cambia</p>
+          <h3>Deja de improvisar frente a la pantalla.</h3>
+        </div>
 
-        <article class="benefit-row">
-          <div class="benefit-symbol reveal from-right">02</div>
-          <div class="benefit-copy reveal from-left">
-            <span class="benefit-number">Sin perseguir</span>
-            <h3 class="benefit-title">Vuelve a entrar sin reclamar, explicar de más ni mandar otro seguimiento.</h3>
-            <p class="benefit-text">Usa mensajes que recuperan el ritmo sin regalar ansiedad ni convertir el chat en una negociación.</p>
-          </div>
-        </article>
+        <div class="timeline" id="timeline">
+          <div class="timeline-fill" id="timelineFill"></div>
 
-        <article class="benefit-row">
-          <div class="benefit-symbol reveal from-left">03</div>
-          <div class="benefit-copy reveal from-right">
-            <span class="benefit-number">Para tu situación</span>
-            <h3 class="benefit-title" id="personalBenefitTitle"></h3>
-            <p class="benefit-text" id="personalBenefitText"></p>
-          </div>
-        </article>
+          <article class="timeline-item" data-node="1">
+            <div class="timeline-circle">1</div>
+            <p class="timeline-benefit" id="benefitOne"></p>
+          </article>
+
+          <article class="timeline-item" data-node="2">
+            <div class="timeline-circle">2</div>
+            <p class="timeline-benefit" id="benefitTwo"></p>
+          </article>
+
+          <article class="timeline-item" data-node="3">
+            <div class="timeline-circle">3</div>
+            <p class="timeline-benefit" id="benefitThree"></p>
+          </article>
+        </div>
       </div>
     </section>
 
     <section class="sales-section offer-section">
       <div class="offer-inner reveal">
         <p class="sales-eyebrow">Acceso inmediato</p>
-        <h2 class="offer-title">Deja de adivinar qué escribir.</h2>
-        <p class="offer-copy">Ten los 7 mensajes listos antes de volver a abrir WhatsApp.</p>
+        <h2 class="offer-title">Abre WhatsApp sabiendo exactamente qué enviar.</h2>
+        <p class="offer-copy">Ten los 7 mensajes listos antes de volver a tocar el chat.</p>
         <p class="price-label">Pago único · Sin suscripción</p>
         <div class="price"><sup>$</sup>9</div>
-        <a class="buy-btn" href="checkout_link_holder">Quiero saber qué enviar</a>
+        <a class="buy-btn" href="checkout_link_holder">Quiero enviar algo que ella quiera responder</a>
         <p class="offer-note">Lectura rápida. Aplicación práctica.</p>
         <p class="legal">Producto educativo. No garantiza una respuesta. Respeta siempre una falta clara de interés, los límites y la reciprocidad.</p>
       </div>
@@ -788,165 +829,309 @@
   <script>
     const questions=[
       {
-        text:'¿Qué cambió primero?',
+        text:'¿Qué te molesta más del chat?',
+        key:'type',
         answers:[
-          {text:'Ahora responde con “jaja”, “sí” o “bien”.',type:'short',title:'Las respuestas cortas cambiaron el ritmo.',copy:'No siempre significan rechazo. Pero otra pregunta suele hacer que la charla pese más.'},
-          {text:'Ahora tarda horas o días.',type:'delay',title:'La demora está creando presión.',copy:'Escribir más para compensar casi siempre añade ansiedad. No interés.'},
-          {text:'Me dejó en visto.',type:'seen',title:'Un visto no se discute.',copy:'Reclamar o insistir empeora todo. La reentrada debe ser limpia o no hacerse.'},
-          {text:'La charla iba bien y murió.',type:'dead',title:'La conversación perdió energía.',copy:'Más preguntas no la reviven. Hace falta cambiar la dirección.'}
+          {text:'Responde “jaja”, “sí” o “bien”.',value:'short'},
+          {text:'Tarda horas o días.',value:'delay'},
+          {text:'Me deja en visto.',value:'seen'},
+          {text:'La charla ya murió.',value:'dead'}
         ]
       },
       {
-        text:'¿Qué haces cuando se enfría?',
+        text:'¿Cómo te hace sentir eso?',
+        key:'feeling',
         answers:[
-          {text:'Mando otra pregunta.',behavior:'interview',title:'Estás intentando salvarla con esfuerzo.',copy:'Pero otra pregunta puede hacer que se sienta como una entrevista.'},
-          {text:'Espero, pero pienso demasiado.',behavior:'overthink',title:'El problema se muda a tu cabeza.',copy:'Mientras más lo piensas, más difícil se vuelve escribir algo natural.'},
-          {text:'Mando varios mensajes.',behavior:'chase',title:'La ansiedad termina escribiendo por ti.',copy:'Un mensaje puede abrir curiosidad. Tres seguidos suelen cerrarla.'},
-          {text:'No escribo por miedo.',behavior:'freeze',title:'Te quedas quieto para no fallar.',copy:'Eso evita un mal mensaje, pero también puede dejar morir una oportunidad.'}
+          {text:'Confundido.',value:'confused'},
+          {text:'Frustrado.',value:'frustrated'},
+          {text:'Ansioso.',value:'anxious'},
+          {text:'Como si estuviera rogando.',value:'begging'}
         ]
       },
       {
-        text:'¿Qué te preocupa más?',
+        text:'¿Qué quieres que pase?',
+        key:'desire',
         answers:[
-          {text:'Parecer desesperado.',fear:'needy',title:'Quieres avanzar sin perder dignidad.',copy:'La solución no es actuar frío. Es saber qué decir y después dejar espacio.'},
-          {text:'Esperar demasiado.',fear:'late',title:'No quieres llegar tarde.',copy:'No necesitas correr. Necesitas una señal clara y un movimiento simple.'},
-          {text:'Volver a aburrirla.',fear:'boring',title:'Sabes que la charla perdió fuerza.',copy:'Cambiar el tema no basta. El mensaje debe cambiar la emoción.'},
-          {text:'Empeorar lo que queda.',fear:'ruin',title:'Quieres reparar sin empujar.',copy:'Eso exige precisión: un mensaje adecuado y luego observar su respuesta.'}
+          {text:'Que responda con ganas.',value:'energy'},
+          {text:'Que pregunte por mí.',value:'asks'},
+          {text:'Que la charla fluya.',value:'flow'},
+          {text:'Saber si aún hay interés.',value:'clarity'}
         ]
       },
       {
-        text:'¿Qué necesitas ahora?',
+        text:'Si nada cambia esta semana...',
+        key:'future',
         answers:[
-          {text:'Mensajes exactos.',need:'scripts',title:'No necesitas más teoría.',copy:'Necesitas ejemplos claros que puedas adaptar a tu situación.'},
-          {text:'Saber cuándo escribir.',need:'timing',title:'El momento también importa.',copy:'Las palabras correctas enviadas por ansiedad todavía pueden salir mal.'},
-          {text:'Saber qué hacer después.',need:'next',title:'Necesitas un plan completo.',copy:'La calma llega cuando sabes qué hacer con cada tipo de respuesta.'},
-          {text:'Algo corto y práctico.',need:'simple',title:'Perfecto. Menos ruido.',copy:'La mejor guía es la que puedes abrir, entender y usar en minutos.'}
+          {text:'Seguiré dudando.',value:'doubt'},
+          {text:'Se enfriará más.',value:'colder'},
+          {text:'Voy a escribir de más.',value:'oversend'},
+          {text:'La voy a perder.',value:'lose'}
+        ]
+      },
+      {
+        text:'Cuando ella tarda, ¿qué haces?',
+        key:'behavior',
+        answers:[
+          {text:'Mando otra pregunta.',value:'interview'},
+          {text:'Reviso el teléfono.',value:'checking'},
+          {text:'Escribo y borro.',value:'rewrite'},
+          {text:'No hago nada por miedo.',value:'freeze'}
+        ]
+      },
+      {
+        text:'¿Qué necesitas hoy?',
+        key:'need',
+        answers:[
+          {text:'Un mensaje exacto.',value:'script'},
+          {text:'Saber cuándo enviarlo.',value:'timing'},
+          {text:'Saber qué hacer después.',value:'next'},
+          {text:'Todo en pasos simples.',value:'simple'}
         ]
       }
     ];
 
-    const profiles={
-      short:{
-        result:'Estás cargando tú solo con la conversación.',
-        copy:'Ella responde lo mínimo. Entonces tú haces más esfuerzo y el chat empieza a sentirse forzado.',
-        insight:'Tu mejor movimiento no es otra pregunta. Es un mensaje que cambie la energía y le dé una razón para participar.',
-        salesTitle:'Deja de cargar tú solo con <span>toda la conversación</span>.',
-        salesSub:'Necesitas un mensaje que rompa el patrón de “jaja”, “sí” y “bien” sin parecer molesto ni necesitado.',
-        benefitTitle:'Haz que deje de responder por compromiso y empiece a participar.',
-        benefitText:'Tu cambio clave es darle algo fácil y curioso que responder, no otra pregunta vacía.'
-      },
-      delay:{
-        result:'La demora está controlando tu manera de escribir.',
-        copy:'Cuando tarda, piensas demasiado. Y cuando respondes, ya no escribes con calma.',
-        insight:'Tu mejor movimiento es saber cuándo entrar, qué decir y cuándo volver a dejar espacio.',
-        salesTitle:'No conviertas cada demora en <span>una crisis de WhatsApp</span>.',
-        salesSub:'Necesitas mensajes que funcionen sin perseguirla y reglas claras para saber cuándo esperar.',
-        benefitTitle:'Vuelve a entrar sin que parezca que llevabas horas esperando.',
-        benefitText:'Aprende cuándo escribir después de una demora y cómo evitar el doble mensaje que regala ansiedad.'
-      },
-      seen:{
-        result:'Necesitas volver a entrar sin reclamar.',
-        copy:'El visto te deja entre dos miedos: escribir de más o no volver a escribir nunca.',
-        insight:'Tu mejor movimiento es una reentrada limpia que no pida explicaciones y mida si todavía hay interés.',
-        salesTitle:'Vuelve a entrar sin convertir el “visto” en <span>un interrogatorio</span>.',
-        salesSub:'Necesitas un mensaje breve que abra una nueva puerta sin rogar atención.',
-        benefitTitle:'Reabre el chat sin mencionar el visto ni pedir explicaciones.',
-        benefitText:'Usa una entrada nueva que mida si todavía existe interés sin ponerla a la defensiva.'
-      },
-      dead:{
-        result:'La conversación perdió energía.',
-        copy:'La charla funcionaba. Después se volvió seca, repetida o sin dirección.',
-        insight:'Tu mejor movimiento es cambiar la energía con un mensaje distinto, no seguir excavando el mismo tema.',
-        salesTitle:'Haz que la conversación vuelva a <span>tener vida</span>.',
-        salesSub:'Necesitas un mensaje que cambie el ritmo antes de que la charla muera del todo.',
-        benefitTitle:'Revive la conversación sin reciclar el tema que ya murió.',
-        benefitText:'Cambia la dirección con un mensaje nuevo que vuelva a despertar curiosidad.'
-      }
-    };
-
-    const behaviorAdditions={
-      interview:' En tu caso, eso también significa dejar de encadenar preguntas.',
-      overthink:' En tu caso, necesitas una regla clara para no pasar horas calculando cada palabra.',
-      chase:' En tu caso, el objetivo es enviar uno bueno y no enterrarlo con otros tres.',
-      freeze:' En tu caso, necesitas una entrada segura para actuar sin parecer necesitado.'
-    };
-
+    const data={type:null,feeling:null,desire:null,future:null,behavior:null,need:null};
+    const selectedIndexes=Array(questions.length).fill(null);
     let current=0;
-    const data={type:'dead',behavior:'',fear:'',need:''};
+    let view='question';
+    let activeBreak=0;
 
     const questionStage=document.getElementById('questionStage');
-    const checkpointStage=document.getElementById('checkpointStage');
+    const breakStage=document.getElementById('breakStage');
     const resultStage=document.getElementById('resultStage');
     const questionText=document.getElementById('questionText');
     const answers=document.getElementById('answers');
     const progressBar=document.getElementById('progressBar');
     const progressCount=document.getElementById('progressCount');
-    const checkpointTitle=document.getElementById('checkpointTitle');
-    const checkpointCopy=document.getElementById('checkpointCopy');
+    const backBtn=document.getElementById('backBtn');
     const continueBtn=document.getElementById('continueBtn');
 
-    function renderQuestion(){
+    const breakByFeeling={
+      confused:{title:'No te falta tema. Te falta claridad.',copy:'Estás cansado de no saber si ella quiere hablar contigo o solo responde por educación.'},
+      frustrated:{title:'Estás cansado de empujar una charla que no avanza.',copy:'Más esfuerzo no siempre crea más interés. A veces solo hace más visible el desequilibrio.'},
+      anxious:{title:'El chat ya controla demasiado tu cabeza.',copy:'Cada demora se siente como una señal. Y terminas pensando más de lo que conversas.'},
+      begging:{title:'Quieres interés. No migajas.',copy:'No quieres seguir mandando mensajes solo para recibir una palabra y volver a empezar.'}
+    };
+
+    const breakByBehavior={
+      interview:{title:'Cada pregunta extra le da más trabajo.',copy:'No necesitas entrevistarla. Necesitas un mensaje que cambie la energía y luego deje espacio.'},
+      checking:{title:'Mirar el teléfono no cambia su respuesta.',copy:'Necesitas una regla clara para enviar, soltar y volver a tu vida.'},
+      rewrite:{title:'La ansiedad está escribiendo por ti.',copy:'Necesitas una frase simple que no tengas que borrar diez veces antes de enviarla.'},
+      freeze:{title:'El miedo a parecer necesitado te deja sin movimiento.',copy:'Necesitas saber cuándo sí actuar y cuándo retirarte sin perder dignidad.'}
+    };
+
+    const profiles={
+      short:{
+        result:'Ella responde, pero tú cargas toda la conversación.',
+        copy:'Recibes una palabra. Tú haces otra pregunta. Y el chat se vuelve más pesado cada vez.',
+        insight:'Tu mejor movimiento es dejar de pedir respuestas y enviar algo que ella quiera completar.',
+        salesTitle:'Deja de recibir un “jaja” y tener que <span>salvar tú solo el chat</span>.',
+        salesSub:'Tu problema no es encontrar otra pregunta. Es cambiar la energía sin parecer desesperado.',
+        benefit:'Rompe el “jaja” con una observación que le dé algo real que responder.'
+      },
+      delay:{
+        result:'Su demora ya está decidiendo cómo escribes.',
+        copy:'Mientras más tarda, más piensas. Y cuando escribes, lo haces para calmarte, no para conectar.',
+        insight:'Tu mejor movimiento es entrar con calma, enviar una sola vez y dejar espacio.',
+        salesTitle:'No dejes que una demora convierta tu mensaje en <span>ansiedad escrita</span>.',
+        salesSub:'Necesitas saber cuándo entrar, qué enviar y cuándo dejar el teléfono quieto.',
+        benefit:'Vuelve a entrar sin que parezca que llevabas horas esperando su respuesta.'
+      },
+      seen:{
+        result:'El visto te dejó entre insistir o desaparecer.',
+        copy:'No quieres reclamar. Tampoco quieres perder una oportunidad por quedarte congelado.',
+        insight:'Tu mejor movimiento es una reentrada nueva que no mencione el visto y mida si todavía existe interés.',
+        salesTitle:'Reabre el chat sin convertir el visto en <span>un interrogatorio</span>.',
+        salesSub:'Necesitas una entrada limpia que no pida explicaciones ni ruegue atención.',
+        benefit:'Reabre el chat sin mencionar el visto ni pedir una explicación.'
+      },
+      dead:{
+        result:'La conversación perdió energía y tú sigues buscando tema.',
+        copy:'La charla funcionaba. Después se volvió seca, repetida y sin dirección.',
+        insight:'Tu mejor movimiento es dejar morir el tema viejo y abrir una emoción nueva.',
+        salesTitle:'Haz que una conversación muerta vuelva a <span>tener algo que seguir</span>.',
+        salesSub:'Necesitas cambiar la dirección, no seguir exprimiendo el tema que ya se acabó.',
+        benefit:'Deja morir el tema viejo y abre una conversación que vuelva a despertar curiosidad.'
+      }
+    };
+
+    const behaviorBenefits={
+      interview:'Usa el “cambio de marco”: deja de preguntar y lanza una frase que ella quiera completar.',
+      checking:'Envía una vez, suelta el teléfono y deja que su respuesta revele el interés real.',
+      rewrite:'Ten una frase lista para enviar sin escribir, borrar y volver a empezar.',
+      freeze:'Sabe cuándo hacer un movimiento y cuándo retirarte sin quedarte con la duda.'
+    };
+
+    const desireBenefits={
+      energy:'Consigue una respuesta con suficiente energía para que la conversación pueda avanzar.',
+      asks:'Crea el espacio para que ella también pregunte, aporte y deje de recibir todo servido.',
+      flow:'Vuelve a una charla natural donde no tengas que inventar el siguiente tema cada minuto.',
+      clarity:'Descubre rápido si aún existe interés, sin perseguir ni vivir de señales confusas.'
+    };
+
+    const feelingNotes={
+      confused:'Dijiste que esta situación te confunde.',
+      frustrated:'Dijiste que esta situación ya te frustra.',
+      anxious:'Dijiste que esta conversación te genera ansiedad.',
+      begging:'Dijiste que a veces sientes que estás rogando atención.'
+    };
+
+    const futureNotes={
+      doubt:'Y si nada cambia, seguirás dudando de cada movimiento.',
+      colder:'Y si nada cambia, la conversación seguirá perdiendo fuerza.',
+      oversend:'Y si nada cambia, sabes que puedes terminar escribiendo de más.',
+      lose:'Y si nada cambia, temes perder la oportunidad por completo.'
+    };
+
+    function renderQuestion(direction='forward'){
+      view='question';
+      questionStage.classList.remove('hidden');
+      breakStage.classList.remove('show');
+      resultStage.classList.remove('show');
+
       const q=questions[current];
       questionText.textContent=q.text;
+      progressCount.textContent=`${current+1}/6`;
       progressBar.style.width=`${((current+1)/questions.length)*100}%`;
-      progressCount.textContent=`${current+1} de ${questions.length}`;
+      backBtn.classList.toggle('visible',current>0);
       answers.innerHTML='';
 
-      q.answers.forEach(answer=>{
+      q.answers.forEach((answer,index)=>{
         const button=document.createElement('button');
         button.type='button';
         button.className='answer';
         button.textContent=answer.text;
-        button.addEventListener('click',()=>selectAnswer(answer));
+        if(selectedIndexes[current]===index)button.classList.add('selected');
+        button.addEventListener('click',()=>selectAnswer(index,button));
         answers.appendChild(button);
       });
+
+      const from=direction==='back'?-24:24;
+      questionStage.animate([
+        {opacity:0,transform:`translateX(${from}px)`},
+        {opacity:1,transform:'translateX(0)'}
+      ],{duration:230,easing:'ease-out'});
     }
 
-    function selectAnswer(answer){
-      if(answer.type)data.type=answer.type;
-      if(answer.behavior)data.behavior=answer.behavior;
-      if(answer.fear)data.fear=answer.fear;
-      if(answer.need)data.need=answer.need;
+    function selectAnswer(index,button){
+      if(button.classList.contains('selected')&&selectedIndexes[current]===index)return;
 
-      checkpointTitle.textContent=answer.title;
-      checkpointCopy.textContent=answer.copy;
+      [...answers.children].forEach(item=>{
+        item.classList.remove('selected');
+        item.disabled=true;
+      });
+
+      button.classList.add('selected');
+      selectedIndexes[current]=index;
+      const q=questions[current];
+      data[q.key]=q.answers[index].value;
+
+      button.animate([
+        {transform:'scale(1)'},
+        {transform:'scale(.975)'},
+        {transform:'scale(.985)'}
+      ],{duration:220,easing:'ease-out'});
+
+      setTimeout(()=>{
+        questionStage.animate([
+          {opacity:1,transform:'translateX(0)'},
+          {opacity:0,transform:'translateX(-24px)'}
+        ],{duration:210,easing:'ease-in'}).onfinish=advanceAfterAnswer;
+      },260);
+    }
+
+    function advanceAfterAnswer(){
       questionStage.classList.add('hidden');
-      checkpointStage.classList.add('show');
+
+      if(current===1){
+        activeBreak=1;
+        showBreak();
+        return;
+      }
+
+      if(current===4){
+        activeBreak=2;
+        showBreak();
+        return;
+      }
+
+      if(current===questions.length-1){
+        showResult();
+        return;
+      }
+
+      current++;
+      renderQuestion();
+    }
+
+    function showBreak(){
+      view='break';
+      backBtn.classList.add('visible');
+      breakStage.classList.add('show');
+
+      const content=activeBreak===1
+        ?(breakByFeeling[data.feeling]||breakByFeeling.confused)
+        :(breakByBehavior[data.behavior]||breakByBehavior.freeze);
+
+      document.getElementById('breakIcon').textContent=activeBreak===1?'!':'✓';
+      document.getElementById('breakKicker').textContent=activeBreak===1?'Lo que realmente pasa':'Tu siguiente movimiento';
+      document.getElementById('breakTitle').textContent=content.title;
+      document.getElementById('breakCopy').textContent=content.copy;
+
+      breakStage.animate([
+        {opacity:0,transform:'scale(.97)'},
+        {opacity:1,transform:'scale(1)'}
+      ],{duration:270,easing:'ease-out'});
     }
 
     continueBtn.addEventListener('click',()=>{
-      checkpointStage.classList.remove('show');
+      breakStage.classList.remove('show');
       current++;
-      if(current<questions.length){
-        questionStage.classList.remove('hidden');
-        renderQuestion();
-      }else{
-        showResult();
+      renderQuestion();
+    });
+
+    backBtn.addEventListener('click',()=>{
+      if(view==='break'){
+        breakStage.classList.remove('show');
+        renderQuestion('back');
+        return;
+      }
+
+      if(view==='result'){
+        resultStage.classList.remove('show');
+        current=questions.length-1;
+        renderQuestion('back');
+        return;
+      }
+
+      if(view==='question'&&current>0){
+        current--;
+        renderQuestion('back');
       }
     });
 
-    function behaviorNote(){
-      const notes={
-        interview:'Por tus respuestas, tiendes a hacer más preguntas cuando notas distancia. Eso puede hacer que ella sienta más trabajo, no más interés.',
-        overthink:'Por tus respuestas, el tiempo que tarda termina controlando cómo escribes. Una regla clara corta esa montaña rusa.',
-        chase:'Por tus respuestas, tu reacción natural es escribir de más. Necesitas un mensaje fuerte y un plan para no sabotearlo después.',
-        freeze:'Por tus respuestas, te frenas por miedo a parecer necesitado. Necesitas saber cuándo sí vale la pena actuar.'
-      };
-      return notes[data.behavior]||'';
-    }
-
     function showResult(){
+      view='result';
+      backBtn.classList.add('visible');
+      resultStage.classList.add('show');
+
       const p=profiles[data.type]||profiles.dead;
       document.getElementById('resultTitle').textContent=p.result;
       document.getElementById('resultCopy').textContent=p.copy;
       document.getElementById('resultInsight').textContent=p.insight;
-      resultStage.classList.add('show');
 
       document.getElementById('salesTitle').innerHTML=p.salesTitle;
       document.getElementById('salesSub').textContent=p.salesSub;
-      document.getElementById('personalNote').textContent=behaviorNote();
-      document.getElementById('personalBenefitTitle').textContent=p.benefitTitle;
-      document.getElementById('personalBenefitText').textContent=p.benefitText+(behaviorAdditions[data.behavior]||'');
+      document.getElementById('personalNote').textContent=`${feelingNotes[data.feeling]||''} ${futureNotes[data.future]||''}`.trim();
+
+      document.getElementById('benefitOne').textContent=p.benefit;
+      document.getElementById('benefitTwo').textContent=behaviorBenefits[data.behavior]||behaviorBenefits.freeze;
+      document.getElementById('benefitThree').textContent=desireBenefits[data.desire]||desireBenefits.clarity;
+
+      resultStage.animate([
+        {opacity:0,transform:'translateY(22px)'},
+        {opacity:1,transform:'translateY(0)'}
+      ],{duration:300,easing:'ease-out'});
     }
 
     document.getElementById('showPlanBtn').addEventListener('click',()=>{
@@ -954,6 +1139,7 @@
       document.getElementById('salesPage').classList.add('show');
       window.scrollTo({top:0,behavior:'instant'});
       initRevealAnimations();
+      requestAnimationFrame(updateTimeline);
     });
 
     function initRevealAnimations(){
@@ -970,10 +1156,45 @@
             observer.unobserve(entry.target);
           }
         });
-      },{threshold:.16,rootMargin:'0px 0px -45px 0px'});
+      },{threshold:.14,rootMargin:'0px 0px -45px 0px'});
 
       items.forEach(item=>observer.observe(item));
     }
+
+    let ticking=false;
+
+    function updateTimeline(){
+      const timeline=document.getElementById('timeline');
+      if(!timeline||!document.getElementById('salesPage').classList.contains('show'))return;
+
+      const rect=timeline.getBoundingClientRect();
+      const viewport=window.innerHeight;
+      const start=viewport*.72;
+      const end=viewport*.30;
+      const total=rect.height-(start-end);
+      const traveled=start-rect.top;
+      const progress=Math.max(0,Math.min(1,traveled/Math.max(total,1)));
+
+      timeline.style.setProperty('--fill',`${progress*100}%`);
+
+      const nodes=[...timeline.querySelectorAll('.timeline-item')];
+      nodes.forEach((node,index)=>{
+        const threshold=index/(nodes.length-1);
+        node.classList.toggle('active',progress>=threshold-.03);
+      });
+    }
+
+    window.addEventListener('scroll',()=>{
+      if(!ticking){
+        requestAnimationFrame(()=>{
+          updateTimeline();
+          ticking=false;
+        });
+        ticking=true;
+      }
+    },{passive:true});
+
+    window.addEventListener('resize',updateTimeline);
 
     renderQuestion();
   </script>
