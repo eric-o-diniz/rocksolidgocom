@@ -103,3 +103,5 @@ jobs:
           git add cita-1/index.html .github/workflows/update-cita-upsell-widget.yml
           git commit -m "Embed Hotmart upsell widget and add De Chat a Cita mockup [skip ci]"
           git push
+
+# Triggered after workflow registration.
