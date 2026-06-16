@@ -380,6 +380,18 @@
       text-align: center;
     }
 
+    .hotmart-widget-wrap {
+      width: 100%;
+      max-width: 680px;
+      margin: 24px auto 0;
+      padding: 4px 0;
+    }
+
+    #hotmart-sales-funnel {
+      width: 100%;
+      margin: 0 auto;
+    }
+
     .security {
       display: flex;
       justify-content: center;
@@ -502,18 +514,10 @@
       <h2>Presentamos: De Chat a Cita</h2>
 
       <div class="mockup-inline">
-        <!-- Reemplaza link_holder por la URL de tu imagen mockup. -->
         <img
-          src="link_holder"
+          src="images/de-chat-a-cita-mockup.webp"
           alt="Mockup del producto De Chat a Cita"
-          onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
         >
-        <div class="mockup-placeholder" hidden>
-          <div>
-            Espacio reservado para el mockup.<br>
-            Reemplaza <code>link_holder</code> en el atributo <code>src</code> de la imagen.
-          </div>
-        </div>
       </div>
 
       <p><strong>De Chat a Cita</strong> es el siguiente paso natural después de recuperar la conversación.</p>
@@ -579,12 +583,18 @@
       <p class="price-label">Pago único</p>
       <div class="price"><sup>$</sup>19</div>
 
-      <!-- Reemplaza checkout_link_holder por tu enlace de upsell/checkout. -->
-      <a class="cta" id="accept-upsell" href="checkout_link_holder">
-        Sí, quiero llevar la conversación a una cita
-      </a>
+      <div class="hotmart-widget-wrap">
+        <!-- HOTMART - Sales Funnel Widget -->
+        <!--- sales funnel container --->
+        <div id="hotmart-sales-funnel"></div>
 
-      <p class="cta-note">Haz clic arriba para agregarlo a tu pedido y recibir acceso inmediato.</p>
+        <!--- script load and setup --->
+        <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+        <script>
+          checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+        </script>
+        <!-- HOTMART - Sales Funnel Widget -->
+      </div>
 
       <div class="security" aria-label="Compra segura">
         <span aria-hidden="true">🔒</span>
