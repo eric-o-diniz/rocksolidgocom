@@ -18,15 +18,17 @@
       --quiz-line:#3c5660;
       --quiz-text:#f6f8f8;
       --quiz-soft:#bbc8cc;
-      --quiz-muted:#7f949b;
       --red:#e31b23;
       --red-dark:#a90000;
       --green:#58cc02;
       --black:#090a0d;
-      --sales-card:#11141a;
-      --sales-card-2:#171b23;
-      --sales-line:rgba(255,255,255,.10);
+      --ink:#16181d;
+      --soft:#68707d;
+      --paper:#ffffff;
+      --paper-alt:#f6f7f9;
+      --line:#e2e5ea;
       --max:680px;
+      --sales-max:1080px;
     }
 
     *{box-sizing:border-box}
@@ -234,7 +236,8 @@
 
     .continue-btn,
     .result-btn,
-    .buy-btn{
+    .buy-btn,
+    .hero-cta{
       width:100%;
       border:0;
       border-radius:15px;
@@ -255,7 +258,8 @@
 
     .continue-btn:hover,
     .result-btn:hover,
-    .buy-btn:hover{
+    .buy-btn:hover,
+    .hero-cta:hover{
       filter:brightness(1.06);
       transform:translateY(-1px);
     }
@@ -309,26 +313,40 @@
     .sales-page{
       display:none;
       min-height:100vh;
-      background:var(--black);
-      color:#f4f1ec;
+      background:var(--paper);
+      color:var(--ink);
+      overflow:hidden;
     }
 
     .sales-page.show{display:block}
 
-    .sales-wrap{
-      width:min(920px,calc(100% - 28px));
+    .sales-section{
+      min-height:72svh;
+      display:grid;
+      place-items:center;
+      padding:clamp(80px,11vw,145px) 22px;
+    }
+
+    .sales-section:nth-child(even){background:var(--paper-alt)}
+
+    .sales-inner{
+      width:min(100%,var(--sales-max));
       margin:0 auto;
-      padding:44px 0 50px;
     }
 
     .sales-hero{
-      max-width:760px;
-      margin:0 auto;
+      min-height:92svh;
+      background:var(--black);
+      color:#f4f1ec;
       text-align:center;
     }
 
+    .sales-hero .sales-inner{
+      max-width:800px;
+    }
+
     .sales-eyebrow{
-      margin:0 0 11px;
+      margin:0 0 14px;
       color:#ff5b5b;
       font-size:12px;
       font-weight:900;
@@ -337,140 +355,174 @@
     }
 
     .sales-title{
-      margin:0 0 16px;
-      font-size:clamp(36px,7vw,64px);
-      line-height:1.02;
-      letter-spacing:-.04em;
+      margin:0 0 20px;
+      font-size:clamp(40px,7vw,72px);
+      line-height:1.01;
+      letter-spacing:-.045em;
     }
 
     .sales-title span{color:#ff4d4d}
 
     .sales-sub{
-      max-width:680px;
+      max-width:700px;
       margin:0 auto;
       color:#b8bdc7;
-      font-size:clamp(17px,2.5vw,20px);
+      font-size:clamp(18px,2.5vw,22px);
       line-height:1.55;
     }
 
     .personal-note{
-      max-width:690px;
-      margin:26px auto 0;
-      padding:18px 19px;
-      border:1px solid var(--sales-line);
+      max-width:700px;
+      margin:32px auto 0;
+      padding:20px 22px;
       border-left:5px solid #ff4d4d;
-      border-radius:11px;
+      border-radius:10px;
       background:#151820;
       color:#fff;
-      font-size:16px;
+      font-size:17px;
       font-weight:750;
-      line-height:1.5;
+      line-height:1.55;
       text-align:left;
     }
 
-    .product-block{
-      max-width:760px;
-      margin:30px auto 0;
-      padding:clamp(22px,4vw,34px);
-      border:1px solid var(--sales-line);
-      border-radius:18px;
-      background:var(--sales-card);
+    .hero-cta{
+      display:block;
+      max-width:390px;
+      margin:32px auto 0;
     }
+
+    .product-layout,
+    .benefit-row{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+      gap:clamp(42px,8vw,100px);
+      align-items:center;
+    }
+
+    .product-layout{max-width:1000px;margin:0 auto}
 
     .mockup{
       width:100%;
-      max-width:680px;
-      margin:0 auto 22px;
-      object-fit:contain;
-    }
-
-    .product-title{
-      margin:0 0 13px;
-      font-size:clamp(29px,5vw,42px);
-      line-height:1.05;
-      text-align:center;
-      letter-spacing:-.03em;
-    }
-
-    .product-copy{
       max-width:620px;
       margin:0 auto;
-      color:#c5c9d1;
-      font-size:16px;
-      line-height:1.55;
-      text-align:center;
+      object-fit:contain;
+      filter:drop-shadow(0 25px 28px rgba(0,0,0,.16));
+      animation:floatMockup 5.5s ease-in-out infinite;
     }
 
-    .benefits{
-      display:grid;
-      gap:14px;
-      max-width:630px;
-      margin:26px auto 0;
-      padding:0;
-      list-style:none;
+    @keyframes floatMockup{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
     }
 
-    .benefits li{
-      position:relative;
-      padding:19px 18px 19px 54px;
-      border:1px solid var(--sales-line);
-      border-radius:13px;
-      background:var(--sales-card-2);
-      text-align:left;
-    }
-
-    .benefits li::before{
-      content:'✓';
-      position:absolute;
-      left:18px;
-      top:18px;
-      color:#61d394;
-      font-size:21px;
-      font-weight:900;
-    }
-
-    .benefits strong{
-      display:block;
-      margin-bottom:6px;
-      color:#fff;
-      font-size:19px;
-      line-height:1.18;
-      text-transform:uppercase;
-      letter-spacing:-.01em;
-    }
-
-    .benefits span{
-      display:block;
-      color:#aeb4bf;
-      font-size:14px;
-      line-height:1.45;
-    }
-
-    .benefits .personalized{
-      border-color:rgba(255,77,77,.42);
-      background:linear-gradient(180deg,rgba(222,0,1,.12),#171b23);
-    }
-
-    .benefits .personalized::before{color:#ff666a}
-
-    .benefits .personalized small{
-      display:block;
-      margin-bottom:7px;
-      color:#ff666a;
-      font-size:11px;
+    .section-kicker{
+      margin:0 0 12px;
+      color:var(--red);
+      font-size:12px;
       font-weight:900;
       letter-spacing:.10em;
       text-transform:uppercase;
     }
 
-    .offer{
-      max-width:620px;
-      margin:29px auto 0;
+    .section-title{
+      margin:0 0 18px;
+      color:var(--ink);
+      font-size:clamp(36px,5.5vw,58px);
+      line-height:1.04;
+      letter-spacing:-.04em;
+    }
+
+    .section-copy{
+      max-width:520px;
+      margin:0;
+      color:var(--soft);
+      font-size:clamp(18px,2vw,21px);
+      line-height:1.62;
+    }
+
+    .benefits-area{
+      background:var(--paper);
+      padding-top:clamp(95px,12vw,160px);
+      padding-bottom:clamp(95px,12vw,160px);
+    }
+
+    .benefit-stack{
+      display:grid;
+      gap:clamp(95px,14vw,170px);
+      max-width:980px;
+      margin:0 auto;
+    }
+
+    .benefit-row:nth-child(even) .benefit-symbol{order:2}
+    .benefit-row:nth-child(even) .benefit-copy{order:1}
+
+    .benefit-symbol{
+      width:min(100%,340px);
+      aspect-ratio:1/1;
+      display:grid;
+      place-items:center;
+      margin:0 auto;
+      border-radius:42px;
+      background:linear-gradient(145deg,#fff3f3,#ffe2e2);
+      color:var(--red);
+      font-size:clamp(74px,11vw,128px);
+      font-weight:900;
+      box-shadow:0 24px 55px rgba(227,27,35,.12);
+    }
+
+    .benefit-number{
+      display:block;
+      margin-bottom:12px;
+      color:var(--red);
+      font-size:13px;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+
+    .benefit-title{
+      margin:0 0 17px;
+      font-size:clamp(34px,5vw,54px);
+      line-height:1.04;
+      letter-spacing:-.04em;
+    }
+
+    .benefit-text{
+      margin:0;
+      color:var(--soft);
+      font-size:clamp(18px,2vw,21px);
+      line-height:1.6;
+    }
+
+    .offer-section{
+      min-height:86svh;
+      background:var(--black)!important;
+      color:#fff;
       text-align:center;
     }
 
+    .offer-inner{
+      width:min(100%,720px);
+      margin:0 auto;
+    }
+
+    .offer-title{
+      margin:0 0 18px;
+      font-size:clamp(40px,7vw,70px);
+      line-height:1.02;
+      letter-spacing:-.045em;
+    }
+
+    .offer-copy{
+      max-width:620px;
+      margin:0 auto;
+      color:#b9bec8;
+      font-size:clamp(18px,2.5vw,21px);
+      line-height:1.55;
+    }
+
     .price-label{
-      margin:0;
+      margin:34px 0 0;
       color:#8f96a3;
       font-size:12px;
       font-weight:800;
@@ -479,8 +531,8 @@
     }
 
     .price{
-      margin:7px 0 18px;
-      font-size:66px;
+      margin:8px 0 22px;
+      font-size:78px;
       font-weight:900;
       line-height:1;
     }
@@ -492,26 +544,44 @@
       font-size:.38em;
     }
 
-    .buy-btn{display:block}
+    .buy-btn{
+      display:block;
+      max-width:480px;
+      margin:0 auto;
+    }
 
     .offer-note{
-      margin:13px 0 0;
+      margin:16px 0 0;
       color:#858c98;
       font-size:12px;
     }
 
     .legal{
       max-width:700px;
-      margin:30px auto 0;
+      margin:34px auto 0;
       color:#6e7480;
       font-size:11px;
       line-height:1.5;
       text-align:center;
     }
 
+    .reveal{
+      opacity:0;
+      transform:translateY(42px);
+      transition:opacity .75s ease,transform .75s ease;
+    }
+
+    .reveal.from-left{transform:translateX(-48px)}
+    .reveal.from-right{transform:translateX(48px)}
+
+    .reveal.visible{
+      opacity:1;
+      transform:translate(0,0);
+    }
+
     .hidden{display:none!important}
 
-    @media(max-width:700px){
+    @media(max-width:760px){
       .quiz-shell{
         width:100%;
         max-width:none;
@@ -526,8 +596,45 @@
       .checkpoint,.result-stage{padding-top:54px}
       .checkpoint-copy,.result-copy{font-size:19px}
       .continue-btn,.result-btn{font-size:19px;padding:20px}
-      .sales-wrap{padding-top:36px}
-      .product-block{padding:22px 16px}
+
+      .sales-section{
+        min-height:auto;
+        padding:92px 22px;
+      }
+
+      .sales-hero{
+        min-height:100svh;
+        padding-top:90px;
+        padding-bottom:90px;
+      }
+
+      .product-layout,
+      .benefit-row{
+        grid-template-columns:1fr;
+        gap:42px;
+        text-align:center;
+      }
+
+      .product-layout .product-copy-block{order:2}
+      .product-layout .mockup-wrap{order:1}
+
+      .section-copy,
+      .benefit-text{margin-left:auto;margin-right:auto}
+
+      .benefit-row:nth-child(even) .benefit-symbol,
+      .benefit-row:nth-child(even) .benefit-copy{
+        order:initial;
+      }
+
+      .benefit-symbol{
+        width:min(78vw,300px);
+        border-radius:34px;
+      }
+
+      .benefit-stack{gap:110px}
+      .benefit-title{font-size:39px}
+      .offer-section{min-height:92svh}
+      .price{font-size:72px}
     }
 
     @media(max-width:420px){
@@ -541,6 +648,15 @@
       .checkpoint-title,.result-title{font-size:33px}
       .checkpoint-copy,.result-copy{font-size:17px}
       .result-insight{font-size:16px}
+
+      .sales-section{padding:78px 18px}
+      .sales-title{font-size:42px}
+      .section-title{font-size:39px}
+      .section-copy,.benefit-text{font-size:18px}
+      .benefit-stack{gap:96px}
+      .benefit-symbol{width:min(82vw,280px)}
+      .benefit-title{font-size:36px}
+      .offer-title{font-size:43px}
     }
 
     @media(max-height:700px) and (max-width:480px){
@@ -554,6 +670,12 @@
       .checkpoint-title,.result-title{font-size:30px}
       .checkpoint-copy,.result-copy{font-size:16px}
       .continue-btn,.result-btn{padding:16px 18px;font-size:17px}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .reveal,.reveal.from-left,.reveal.from-right{opacity:1;transform:none;transition:none}
+      .mockup{animation:none}
     }
   </style>
 </head>
@@ -594,42 +716,73 @@
   </main>
 
   <section class="sales-page" id="salesPage">
-    <div class="sales-wrap">
-      <div class="sales-hero">
+    <section class="sales-section sales-hero">
+      <div class="sales-inner reveal">
         <p class="sales-eyebrow">Recomendación basada en tus respuestas</p>
         <h2 class="sales-title" id="salesTitle"></h2>
         <p class="sales-sub" id="salesSub"></p>
         <div class="personal-note" id="personalNote"></div>
+        <a class="hero-cta" href="#product">Ver la solución recomendada</a>
       </div>
+    </section>
 
-      <div class="product-block">
-        <img class="mockup" src="https://rocksolidgo.com/7mensajes/images/7mensajesmockup.webp?_t=1781413785" alt="7 Mensajes Para Revivir un Chat Frío">
+    <section class="sales-section" id="product">
+      <div class="sales-inner product-layout">
+        <div class="mockup-wrap reveal from-left">
+          <img class="mockup" src="https://rocksolidgo.com/7mensajes/images/7mensajesmockup.webp?_t=1781413785" alt="7 Mensajes Para Revivir un Chat Frío">
+        </div>
 
-        <h3 class="product-title">7 Mensajes Para Revivir un Chat Frío</h3>
-        <p class="product-copy">Una guía corta con mensajes exactos para reactivar su curiosidad cuando responde corto, tarda demasiado o la conversación perdió toda la energía.</p>
-
-        <ul class="benefits">
-          <li>
-            <strong>Sabrás qué enviar en menos de 2 minutos.</strong>
-            <span>Abre la guía, identifica tu situación y adapta el mensaje.</span>
-          </li>
-          <li>
-            <strong>Deja de matar el chat con otro “¿qué haces?”.</strong>
-            <span>Usa un movimiento que cambie la energía sin perseguirla.</span>
-          </li>
-          <li class="personalized" id="personalizedBenefit"></li>
-        </ul>
-
-        <div class="offer">
-          <p class="price-label">Acceso inmediato · Pago único</p>
-          <div class="price"><sup>$</sup>9</div>
-          <a class="buy-btn" href="checkout_link_holder">Quiero saber qué enviar</a>
-          <p class="offer-note">Sin suscripción. Lectura rápida. Aplicación práctica.</p>
+        <div class="product-copy-block reveal from-right">
+          <p class="section-kicker">Una guía corta. Un problema claro.</p>
+          <h3 class="section-title">7 mensajes para saber qué enviar cuando el chat se apaga.</h3>
+          <p class="section-copy">Abres la guía, eliges la situación que se parece a la tuya y adaptas el mensaje. Sin teoría eterna. Sin inventar sobre la marcha.</p>
         </div>
       </div>
+    </section>
 
-      <p class="legal">Producto educativo. No garantiza una respuesta. Respeta siempre una falta clara de interés, los límites y la reciprocidad.</p>
-    </div>
+    <section class="sales-section benefits-area">
+      <div class="sales-inner benefit-stack">
+        <article class="benefit-row">
+          <div class="benefit-symbol reveal from-left">01</div>
+          <div class="benefit-copy reveal from-right">
+            <span class="benefit-number">Lo que cambia</span>
+            <h3 class="benefit-title">Consigue una respuesta que te dé algo real para seguir.</h3>
+            <p class="benefit-text">Aprende a reabrir con una observación que despierta curiosidad, en vez de otra pregunta que termina en “jaja”.</p>
+          </div>
+        </article>
+
+        <article class="benefit-row">
+          <div class="benefit-symbol reveal from-right">02</div>
+          <div class="benefit-copy reveal from-left">
+            <span class="benefit-number">Sin perseguir</span>
+            <h3 class="benefit-title">Vuelve a entrar sin reclamar, explicar de más ni mandar otro seguimiento.</h3>
+            <p class="benefit-text">Usa mensajes que recuperan el ritmo sin regalar ansiedad ni convertir el chat en una negociación.</p>
+          </div>
+        </article>
+
+        <article class="benefit-row">
+          <div class="benefit-symbol reveal from-left">03</div>
+          <div class="benefit-copy reveal from-right">
+            <span class="benefit-number">Para tu situación</span>
+            <h3 class="benefit-title" id="personalBenefitTitle"></h3>
+            <p class="benefit-text" id="personalBenefitText"></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sales-section offer-section">
+      <div class="offer-inner reveal">
+        <p class="sales-eyebrow">Acceso inmediato</p>
+        <h2 class="offer-title">Deja de adivinar qué escribir.</h2>
+        <p class="offer-copy">Ten los 7 mensajes listos antes de volver a abrir WhatsApp.</p>
+        <p class="price-label">Pago único · Sin suscripción</p>
+        <div class="price"><sup>$</sup>9</div>
+        <a class="buy-btn" href="checkout_link_holder">Quiero saber qué enviar</a>
+        <p class="offer-note">Lectura rápida. Aplicación práctica.</p>
+        <p class="legal">Producto educativo. No garantiza una respuesta. Respeta siempre una falta clara de interés, los límites y la reciprocidad.</p>
+      </div>
+    </section>
   </section>
 
   <script>
@@ -679,7 +832,8 @@
         insight:'Tu mejor movimiento no es otra pregunta. Es un mensaje que cambie la energía y le dé una razón para participar.',
         salesTitle:'Deja de cargar tú solo con <span>toda la conversación</span>.',
         salesSub:'Necesitas un mensaje que rompa el patrón de “jaja”, “sí” y “bien” sin parecer molesto ni necesitado.',
-        benefitTitle:'Rompe el ciclo de “jaja”, “sí” y “bien”.'
+        benefitTitle:'Haz que deje de responder por compromiso y empiece a participar.',
+        benefitText:'Tu cambio clave es darle algo fácil y curioso que responder, no otra pregunta vacía.'
       },
       delay:{
         result:'La demora está controlando tu manera de escribir.',
@@ -687,7 +841,8 @@
         insight:'Tu mejor movimiento es saber cuándo entrar, qué decir y cuándo volver a dejar espacio.',
         salesTitle:'No conviertas cada demora en <span>una crisis de WhatsApp</span>.',
         salesSub:'Necesitas mensajes que funcionen sin perseguirla y reglas claras para saber cuándo esperar.',
-        benefitTitle:'No dejes que su demora te haga escribir de más.'
+        benefitTitle:'Vuelve a entrar sin que parezca que llevabas horas esperando.',
+        benefitText:'Aprende cuándo escribir después de una demora y cómo evitar el doble mensaje que regala ansiedad.'
       },
       seen:{
         result:'Necesitas volver a entrar sin reclamar.',
@@ -695,7 +850,8 @@
         insight:'Tu mejor movimiento es una reentrada limpia que no pida explicaciones y mida si todavía hay interés.',
         salesTitle:'Vuelve a entrar sin convertir el “visto” en <span>un interrogatorio</span>.',
         salesSub:'Necesitas un mensaje breve que abra una nueva puerta sin rogar atención.',
-        benefitTitle:'Vuelve a entrar sin reclamar el visto.'
+        benefitTitle:'Reabre el chat sin mencionar el visto ni pedir explicaciones.',
+        benefitText:'Usa una entrada nueva que mida si todavía existe interés sin ponerla a la defensiva.'
       },
       dead:{
         result:'La conversación perdió energía.',
@@ -703,15 +859,16 @@
         insight:'Tu mejor movimiento es cambiar la energía con un mensaje distinto, no seguir excavando el mismo tema.',
         salesTitle:'Haz que la conversación vuelva a <span>tener vida</span>.',
         salesSub:'Necesitas un mensaje que cambie el ritmo antes de que la charla muera del todo.',
-        benefitTitle:'Cambia la energía antes de que muera del todo.'
+        benefitTitle:'Revive la conversación sin reciclar el tema que ya murió.',
+        benefitText:'Cambia la dirección con un mensaje nuevo que vuelva a despertar curiosidad.'
       }
     };
 
-    const behaviorCopy={
-      interview:'Deja de convertir cada respuesta en otra pregunta. Usa un mensaje con dirección.',
-      overthink:'Sabrás cuándo escribir y cuándo dejar el teléfono quieto.',
-      chase:'Envía un mensaje con intención y evita enterrarlo con otros tres.',
-      freeze:'Reconoce cuándo sí vale la pena actuar sin parecer necesitado.'
+    const behaviorAdditions={
+      interview:' En tu caso, eso también significa dejar de encadenar preguntas.',
+      overthink:' En tu caso, necesitas una regla clara para no pasar horas calculando cada palabra.',
+      chase:' En tu caso, el objetivo es enviar uno bueno y no enterrarlo con otros tres.',
+      freeze:' En tu caso, necesitas una entrada segura para actuar sin parecer necesitado.'
     };
 
     let current=0;
@@ -788,14 +945,35 @@
       document.getElementById('salesTitle').innerHTML=p.salesTitle;
       document.getElementById('salesSub').textContent=p.salesSub;
       document.getElementById('personalNote').textContent=behaviorNote();
-      document.getElementById('personalizedBenefit').innerHTML=`<small>Basado en tus respuestas</small><strong>${p.benefitTitle}</strong><span>${behaviorCopy[data.behavior]||'Recibe el movimiento adecuado para tu situación y evita empeorarla.'}</span>`;
+      document.getElementById('personalBenefitTitle').textContent=p.benefitTitle;
+      document.getElementById('personalBenefitText').textContent=p.benefitText+(behaviorAdditions[data.behavior]||'');
     }
 
     document.getElementById('showPlanBtn').addEventListener('click',()=>{
       document.getElementById('quizView').classList.add('hidden');
       document.getElementById('salesPage').classList.add('show');
       window.scrollTo({top:0,behavior:'instant'});
+      initRevealAnimations();
     });
+
+    function initRevealAnimations(){
+      const items=document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)){
+        items.forEach(item=>item.classList.add('visible'));
+        return;
+      }
+
+      const observer=new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },{threshold:.16,rootMargin:'0px 0px -45px 0px'});
+
+      items.forEach(item=>observer.observe(item));
+    }
 
     renderQuestion();
   </script>
