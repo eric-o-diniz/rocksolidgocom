@@ -836,9 +836,10 @@
         'single',
         'Primero: identifica el tipo de frío',
         '¿Qué está pasando con ella ahora mismo?',
+        ' ',
         [
           ['La conversación ya murió.', 'dead'],
-          ['Responde “jaja” y desaparece.', 'short'],
+          ['Responde “jaja”, “sí” o “bien”… y desaparece.', 'short'],
           ['Tarda horas o días en responder.', 'delay'],
           ['Me dejó en visto.', 'seen']
         ]
@@ -847,11 +848,12 @@
         'single',
         'Ahora: mira tu reacción',
         'Cuando notas eso, ¿qué haces normalmente?',
+        ' ',
         [
           ['Mando otra pregunta para salvar la charla.', 'interview'],
-          ['No hago nada porque no sé cuál es el mejor mensaje.', 'freeze'],
-          ['Pienso demasiado cada mensaje.', 'overthink'],
-          ['Escribo de más y después me arrepiento.', 'chase']
+          ['Me quedo mirando el chat sin saber qué escribir.', 'freeze'],
+          ['Escribo, borro y vuelvo a escribir.', 'overthink'],
+          ['Mando otro mensaje y luego me arrepiento.', 'chase']
         ]
       ],
       [
@@ -870,7 +872,7 @@
         'yesno',
         'Una pregunta directa',
         '¿Has enviado más de un mensaje sin recibir respuesta?',
-        'Esto ayuda a medir cuánto estás persiguiendo la conversación.',
+        ' ',
         [
           ['Sí', 'yesdouble'],
           ['No', 'nodouble']
@@ -893,10 +895,11 @@
         'single',
         'Tu miedo principal',
         '¿Qué es lo que más quieres evitar?',
+        ' ',
         [
           ['Parecer desesperado.', 'needy'],
           ['Mandar otro mensaje aburrido.', 'boring'],
-          ['Perder la por no escribir nada.', 'miss'],
+          ['Perder la oportunidad por no escribir nada.', 'miss'],
           ['Empeorar algo que todavía puede volver.', 'ruin']
         ]
       ],
@@ -916,6 +919,7 @@
         'yesno',
         'Preparamos tu recomendación',
         '¿Te preocupa que un mensaje preparado suene falso o copiado?',
+        ' ',
         [
           ['Sí', 'fakefear'],
           ['No', 'nofake']
@@ -937,6 +941,7 @@
         'single',
         'Última pregunta',
         'Si tuvieras el mensaje correcto, ¿qué harías?',
+        ' ',
         [
           ['Lo enviaría hoy.', 'today'],
           ['Lo adaptaría primero a mi caso.', 'adapt'],
